@@ -1,0 +1,38 @@
+html, body {
+    height: 100%;
+    background-color: #f8f8f8;
+    font-family: 'Raleway', sans-serif !important;
+     
+  }
+::-webkit-scrollbar {
+    width: 7px;
+  }
+::-webkit-scrollbar-track {
+    background: #dbdbdb; 
+    border-radius: 10px;
+  }
+::-webkit-scrollbar-thumb {
+    background: #e4ff4b; 
+    border-radius: 10px;
+  }
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(114, 114, 114); 
+  }
+
+.font_bold{
+    font-weight: 900 !important;
+  }
+
+.font_light{
+    font-weight: 100 !important;
+  }
+.font_normale{
+    font-weight: 500 !important;
+  }
+.slick-prev:before, .slick-next:before { 
+    color:rgb(27, 27, 27) !important;
+    font-size: 30px;
+}
+
+
+

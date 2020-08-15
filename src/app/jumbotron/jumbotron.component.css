@@ -1,0 +1,17 @@
+.mytitle_top{
+    margin-top: 14% !important
+}
+@media only screen and (max-width: 600px) {
+    .mytitle_top{
+        margin-top: 50% !important;
+    }
+}
+.text_style_h1{
+    font-size: 110px;
+    -webkit-text-fill-color: #1b1b1b;
+    line-height: 80%;
+}
+.text_style_h6{
+    font-size: 20px;
+    -webkit-text-fill-color: #1b1b1b;
+}

@@ -1,0 +1,113 @@
+.aboutus-area {
+    padding-top:120px;
+    padding-bottom:120px;
+}
+
+.aboutus-image {
+    margin-right: 52px;
+    width: 418px; 
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .aboutus-image {
+      margin-right: 35px;
+      width: 345px; 
+     } 
+    }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .aboutus-image {
+      margin-bottom: 30px;
+      float: none; 
+    } 
+    }
+@media only screen and (max-width: 767px) {
+    .aboutus-image {
+      margin-bottom: 30px;
+      margin-right: 0;
+      float: none;
+      width: auto; 
+     } 
+    }
+.aboutus-image img {
+    width: 100%; 
+}
+
+
+.aboutus-content h1 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 40px;
+  margin-bottom: 2px; 
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: #262626;
+  
+}
+@media only screen and (max-width: 479px) {
+     .aboutus-content h1 {
+         font-size: 30px;
+         line-height: 30px; 
+        } 
+    }
+
+.aboutus-content h1 span {
+    color: #e9ff6b; 
+}
+
+.aboutus-content h4 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #7c7c7c;
+  margin-bottom: 23px; 
+}
+
+.aboutus-content p {
+  font-size: 16px;
+  line-height: 27px;
+}
+  
+
+.counter {
+  border: 1px solid #eeeeee;
+  margin-top: 19px;
+  float: right;
+  width: 52%;
+   }
+.counter .single-counter {
+    float: left;
+    width: 33%;
+    padding: 19px; }
+@media only screen and (max-width: 767px) {
+    .counter{
+
+        width: 100% !important; 
+    }
+    .counter .single-counter {
+        
+        width: 33%;
+        
+        
+    }
+    .counter .single-counter:nth-child(3) {
+        border-top: 1px solid #eeeeee;
+        border-left: 1px solid #eeeeee; 
+        }
+    .counter .single-counter:nth-child(4) {
+        border-top: 1px solid #eeeeee; 
+        } 
+}
+.counter .single-counter  {
+      border-left: 1px solid #eeeeee; 
+    }
+.counter .single-counter h2 {
+      font-size: 30px;
+      color: #e9ff6b;
+      line-height: 14px;
+      margin-bottom: 8px; 
+      -webkit-text-stroke-width: 0.4px;
+      -webkit-text-stroke-color: #262626;
+    }
+.counter .single-counter p {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 0;
+      color: #8f8f8f; 
+    }
