@@ -4,8 +4,9 @@
 }
 
 .aboutus-image {
-    margin-right: 52px;
-    width: 418px; 
+    margin-right: 32px;
+    margin-left: -120px !important;
+    width: 558px; 
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
     .aboutus-image {
@@ -32,15 +33,7 @@
 }
 
 
-.aboutus-content h1 {
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 40px;
-  margin-bottom: 2px; 
-  -webkit-text-stroke-width: 0.4px;
-  -webkit-text-stroke-color: #262626;
-  
-}
+
 @media only screen and (max-width: 479px) {
      .aboutus-content h1 {
          font-size: 30px;
@@ -48,22 +41,6 @@
         } 
     }
 
-.aboutus-content h1 span {
-    color: #e9ff6b; 
-}
-
-.aboutus-content h4 {
-  font-size: 18px;
-  font-weight: 500;
-  color: #7c7c7c;
-  margin-bottom: 23px; 
-}
-
-.aboutus-content p {
-  font-size: 16px;
-  line-height: 27px;
-}
-  
 
 .counter {
   border: 1px solid #eeeeee;

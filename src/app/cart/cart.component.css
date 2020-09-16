@@ -1,0 +1,27 @@
+.sizetxt{
+    font-size: 12px ;
+}
+.textlink{
+    text-decoration: none;
+    color: rgb(24, 24, 24);
+    font-weight: 700;
+}
+
+.btn_insta{
+    background-image: url('../img/btncouleur_insta.jpg');
+    height: 100%; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    color: rgb(241, 241, 241);
+}.btn_insta:hover{
+    opacity: 0.8;
+}
+@media only screen and (max-width:600px){
+	#marginbtm{
+		margin-bottom: 100px !important;
+	}
+}
+.mymodel{
+    display: none;
+}

@@ -1,0 +1,234 @@
+<app-header></app-header>
+<div class="container  p-4 " style="margin-top: 100px;">
+ <div class="row">
+   <div class="card col-lg-3 border-0 userinfi">
+   <div class="card-body px-2">
+   <img src="https://image.flaticon.com/icons/svg/1161/1161490.svg" class="rounded-circle d-inline" width="20px" height="20px" style="margin-top: -12px;">
+   <h4 class="font_bold text-uppercase d-inline">{{onlineUser.prenom}} {{onlineUser.nom}}</h4> 
+   <button data-toggle="modal" data-target="#exampleModalCenter" class="font_bold btn btn-light btn-sm shadow rounded-circle float-right d-inline" ><i class="fas fa-edit"></i></button> 
+   <p class="font_normale mt-2" style=" font-size: 14px;"><span class="font_bold">E-mail:</span> {{onlineUser.email}}</p> 
+   <p class="font_normale " style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Sexe:</span>  {{onlineUser.sexe}}</p> 
+   <p class=" nbr_font" style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Téléphone:</span>  {{onlineUser.telephone}}</p> 
+   </div>
+   </div>    
+   <div class="card col-lg-5 border-0 ml-3 mr-3 text-light livraison" >
+   <div class="card-body">
+   <h5 class="font_bold d-inline">Adresse de livraison</h5> 
+   <button data-toggle="modal" data-target="#exampleModalCenter2" class="font_bold btn btn-light btn-sm shadow rounded-circle float-right d-inline"><i class="fas fa-edit"></i></button> 
+   <p class="font_normale mt-2" style=" font-size: 14px;" ><span class="font_bold">Ville:</span> {{onlineUser.ville}}</p> 
+   <p class="font_normale " style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Adresse:</span> {{onlineUser.addressedelivraison}}</p>  
+   </div>
+   </div>   
+   <div class="card col-lg-3 border-0 achat">
+   <div class="card-body">
+   <h5 class="font_bold d-inline">Vos achats</h5> 
+   <div *ngIf="ordersdetailnotfound" class="mt-1">
+     <p class="font_bold "  style="font-size: 12px ;color: rgb(83, 83, 83);"> Tu as rien acheté jusqu'à l'instant</p>
+   </div>
+   <div *ngIf="!ordersdetailnotfound" class="mt-1">
+     <div class="card border-0 " *ngFor="let o of orderdetail | paginate: { itemsPerPage: 2, currentPage: p, id : 'p' }" style="background-color: #ffebee00;border-radius: 17px;box-shadow: 0px 7px 11px 0px #9c9c9c14;">
+        <div class="card-body p-1">
+          <blockquote class="blockquote mb-0">
+            <footer class="blockquote-footer" style="font-size: 9px; margin-bottom: -10px;">{{o.createdAt | date:shortDate }}</footer>
+            <a class="font_bold " [routerLink]="['/products/',o.order.product._id , onlineUser._id ]"  style="font-size: 12px ;color: rgb(83, 83, 83); white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 175px;">{{(o.order.product.name.length>30)?(o.order.product.name | slice:0:30)+'..':(o.order.product.name)}}</a>
+          </blockquote>
+        </div>
+      </div>
+      <div class="mt-1"><pagination-controls directionLinks="false" autoHide="true" id="p" responsive="true" previousLabel="Précédent" nextLabel="Suivant" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="Vous êtes sur la page"  (pageChange)="p = $event"></pagination-controls></div> </div>
+   </div>
+   </div>   
+</div>  
+ 
+
+<div class="row mt-5">
+   <div class="card col-lg-6 border-0 text-light suivi">
+   <div class="card-body">
+   <h5 class="font_bold  d-inline">Suivi de livraisons</h5> 
+   <button class="font_bold btn btn-danger btn-sm shadow ml-1 float-right d-inline p-1" style="border-radius: 20px; font-size: 10px;pointer-events: none;" >Collecté</button>
+   <button class="font_bold btn btn-warning btn-sm shadow ml-1  float-right d-inline p-1" style="border-radius: 20px; font-size: 10px;pointer-events: none;" >Livré</button>
+   <button class="font_bold btn btn-success btn-sm shadow   float-right d-inline p-1" style="border-radius: 20px; font-size: 10px;pointer-events: none;"  >À récupérer</button>
+   <div *ngIf="ordersdetailnotfound"><p class="font_bold mt-2"  style="font-size: 12px ;"> Tu as rien acheté jusqu'à l'instant</p></div>
+   <div *ngIf="!ordersdetailnotfound">
+   <div *ngFor="let or of orderdetail | paginate: { itemsPerPage: 3, currentPage: pa, id: 'pa' }">
+   <blockquote class="blockquote mb-0 mt-3">
+     <footer class="blockquote-footer text-light" style="font-size: 9px; margin-bottom: -10px;">{{or.createdAt | date:shortDate }} | {{(or.order.product.name.length>30)?(or.order.product.name | slice:0:30)+'..':(or.order.product.name)}}</footer>
+     <a class="font_bold nbr_font " style="font-size: 12px ; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 175px;"><span  style="color: rgb(211, 210, 210);">ID du colis:</span> {{or._id}}</a>
+   </blockquote>
+   <div  class="progress" style="border-radius: 20px; height: 11px;">
+     <div *ngIf="or.v" class="progress-bar progress-bar-striped progress-bar-animated bg-danger font_bold" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+     <div *ngIf="or.l" class="progress-bar progress-bar-striped progress-bar-animated bg-warning font_bold" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
+     <div *ngIf="or.r"  class="progress-bar progress-bar-striped progress-bar-animated bg-success font_bold" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+   </div></div><div class="mt-3"><pagination-controls directionLinks="false" id="pa" autoHide="true" responsive="false" previousLabel="Précédent" nextLabel="Suivant" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="Vous êtes sur la page"  (pageChange)="pa = $event"></pagination-controls></div> 
+   </div>
+ 
+   </div>
+   </div>    
+   <div class="card col-lg-3 border-0 ml-3 mr-3 coupon">
+   <div class="card-body">
+   <h5 class="font_bold d-inline">Vos coupon</h5> 
+   <p class="font_bold mt-2 "  style="font-size: 12px ;color: rgb(83, 83, 83);"> Tu as aucun coupon</p>
+  
+   </div>
+   </div>   
+   <div class="card col-lg-2 border-0 deleteaccont">
+   <div class="card-body">
+   <h6 class="font_bold d-inline">Votre compte</h6> 
+   <p class="font_normale mt-2" style="color: rgb(161, 161, 161) !important; font-size: 14px;" >Salut {{onlineUser.prenom}}, sur cette casqe tu peux supprimer ton compte.. </p> 
+   <button class="btn btn-sm btn-danger font_bold rounded-pill shadow"><i class="far fa-trash-alt"></i> Supprimer</button>
+   </div>
+   </div>   
+ </div> 
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-light" style="border-radius: 19px;">
+      <div class="modal-header">
+        <h2 class="modal-title font_bold" id="exampleModalCenterTitle">Modifier mes information</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form [formGroup]="userinfoForm">
+          <div class="row">
+            <div class="col">
+              <label for="prenom" class="font_bold mb-0" style="font-size: 12px;">Prenom :</label>
+              <input type="text" id="prenom" formControlName="prenom" class="form-control rounded-pill" [value]="onlineUser.prenom">
+            </div>
+            <div class="col">
+              <label for="nom" class="font_bold mb-0" style="font-size: 12px;">Nom :</label>
+              <input type="text" id="nom" formControlName="nom" class="form-control rounded-pill"  [value]="onlineUser.nom">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <label for="email" class="font_bold mb-0" style="font-size: 12px;">E-mail :</label>
+              <input type="text" id="email" formControlName="email" class="form-control rounded-pill"  [value]="onlineUser.email">
+            </div>
+            <div class="col">
+              <label for="password" class="font_bold mb-0" style="font-size: 12px;">Mot de passe :</label>
+              <button class="btn btn-light btn-sm shadow rounded-pill font_normale mt-2" data-dismiss="modal" style="font-size: 10px;" data-toggle="modal" data-target="#exampleModalCenter3" >Changer le mot de passe</button>
+            </div>
+            
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <label for="sexe" class="font_bold mb-0" style="font-size: 12px;">Sexe :</label>
+              <input type="text" id="sexe" formControlName="sexe" class="form-control rounded-pill"  [value]="onlineUser.sexe">
+            </div>
+            <div class="col">
+              <label for="telephone" class="font_bold mb-0" style="font-size: 12px;">Telephone :</label>
+              <input type="text" id="telephone" formControlName="telephone" class="form-control rounded-pill" [value]="onlineUser.telephone">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input type="hidden" id="ville"  formControlName="ville" class="form-control rounded-pill" [value]="onlineUser.ville">
+            </div>
+            <div class="col">
+              <input type="hidden" id="type" formControlName="type" class="form-control rounded-pill" [value]="onlineUser.type">
+            </div>
+            <div class="col">
+              <input type="hidden" id="addressedelivraison"  formControlName="addressedelivraison" class="form-control rounded-pill"  [value]="onlineUser.addressedelivraison">
+            </div>
+          </div>
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-light rounded-pill font_bold shadow" data-dismiss="modal" style="font-size: 14px;" >Fermer</button>
+        <button  type="button" (click)="updateuserinfo()"  data-dismiss="modal" class="btn rounded-pill btncommande font_bold shadow" style="font-size: 14px;" >Modifier mes informations</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-light" style="border-radius: 19px;">
+      <div class="modal-header">
+        <h2 class="modal-title font_bold" id="exampleModalCenterTitle">L'adresse de livraison</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form [formGroup]="useradresseForm">
+          <div class="row">
+            <div class="col">
+              <input type="hidden" id="prenom2"  formControlName="prenom2" class="form-control rounded-pill" [value]="onlineUser.prenom">
+            </div>
+            <div class="col">
+              <input type="hidden" id="nom2" formControlName="nom2" class="form-control rounded-pill"  [value]="onlineUser.nom">
+            </div>
+          </div>
+          <div class="col">
+            <input type="hidden" id="type2" formControlName="type2" class="form-control rounded-pill" [value]="onlineUser.type">
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <input type="hidden" id="email2" formControlName="email2" class="form-control rounded-pill"  [value]="onlineUser.email">
+            </div>
+            <div class="col">
+          
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <input type="hidden" id="sexe2" formControlName="sexe2" class="form-control rounded-pill"  [value]="onlineUser.sexe">
+            </div>
+            <div class="col">
+              <input type="hidden" id="telephone2"  formControlName="telephone2" class="form-control rounded-pill" [value]="onlineUser.telephone">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="ville" class="font_bold mb-0" style="font-size: 12px;">Ville :</label>
+              <input type="text" id="ville2" formControlName="ville2" class="form-control rounded-pill" [value]="onlineUser.ville">
+            </div>
+            <div class="col">
+              <label for="addressedelivraison" class="font_bold mb-0" style="font-size: 12px;">Adresse de livraison :</label>
+              <input type="text" id="addressedelivraison2" formControlName="addressedelivraison2" class="form-control rounded-pill"  [value]="onlineUser.addressedelivraison">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-light rounded-pill  font_bold shadow" style="font-size: 14px;" data-dismiss="modal">Fermer</button>
+        <button  type="button" (click)="updateuseradresse()"  data-dismiss="modal" class="btn rounded-pill shadow btncommande font_bold" style="font-size: 14px;" >Modifier l'adresse</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-light" style="border-radius: 19px;">
+      <div class="modal-header">
+        <h2 class="modal-title font_bold" id="exampleModalCenterTitle">Modification de mot de passe</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userpasswordForm">
+          <div class="row">
+            <div class="col">
+              <label for="password" class="font_bold mb-0" style="font-size: 12px;">Entrer le nouveau mot de passe :</label>
+              <input type="text" id="password"  formControlName="password" class="form-control rounded-pill">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-light rounded-pill  font_bold shadow" style="font-size: 14px;" data-dismiss="modal">Fermer</button>
+        <button  type="button" (click)="updatepassword()"  data-dismiss="modal" class="btn rounded-pill shadow btncommande font_bold" style="font-size: 14px;" >Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

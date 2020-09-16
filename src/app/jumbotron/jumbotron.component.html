@@ -1,5 +1,197 @@
-<div class="text-center col-lg-3 col-sm-12 ml-sm-0 ml-lg-5 mytitle_top " >
-    <h1 class="text_style_h1 font_bold">MY SHOP</h1>
-    <h6 class="text_style_h6 font_normale ">― TOUT CE QUE TU AIMES ―</h6>
-    <button class="btn btn-outline-dark mt-md-3 shadow" >VOIR NOS PRODUITS</button>
+<div class="container col-lg-12 h-100">
+<nav class="navbar navbar-expand-lg navbar-light mt-lg-1" style="background-color: #e5ff73; max-height:70px; border-radius:17px;">
+<div class="collapse justify-content-center navbar-collapse" >
+<ul class="nav navbar-nav font_bold " style="font-size: 14px;" >
+<li class="nav-item">
+    <a class="nav-link text-dark "  href="#">Maison</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark " href="#">Vêtements</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link text-dark  " href="#">Elecronic</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link text-dark " href="#">Beauté</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link font_bold btn btn-sm text-white rounded-pill mr-2 p-1 mt-1 ml-2 btncopraoriginal " style="font-size: 12px;" [routerLink]="['/copra-original']" >COPRA#original</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link font_bold btn btn-sm text-white rounded-pill  mr-2 p-1 mt-1 btncoprapromo " style="font-size: 12px;" [routerLink]="['/copra-promo']" >COPRA#promo</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link font_bold btn btn-sm text-white rounded-pill  p-1 mt-1 btncoprafood " style="font-size: 12px;" [routerLink]="['/copra-food']"  >COPRA#food</a>
+</li> </ul></div>
+
+<div class="collapse navbar-collapse" >
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item ">
+     <div class="s003 ">
+      <form>
+      <div class="inner-form">
+      <div class="input-field first-wrap">
+       <div class="input-select">
+       <select data-trigger="" class="custom-select" name="choices-single-defaul">
+        <option placeholder="">Categories</option>
+        <option>Maison</option>
+        <option>Elecronic</option>
+        <option>Beauté</option>
+        <option>Vêtements</option>
+       </select>
+     </div>
+  </div>
+   <div class="input-field second-wrap">
+    <input id="search" [(ngModel)]="search"[ngModelOptions]="{standalone: true}"  (keyup)="onKey($event)" type="text" placeholder="iPhone 11 Pro Max.." />
+    </div>
+                  <!-- <div class="input-field third-wrap">
+                    <button class="btn-search" type="submit">
+                      <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                      </svg>
+                    </button>
+                  </div> -->
+   </div>  </form>   
+    </div>
+ <div class="mysearchcontent text-left p-3" *ngIf="!isempty">
+    <table class="table table-sm borderless">
+     <tbody *ngFor="let p of productsearch | filter:search">
+      <tr class="border-light">
+       <td><img [src]="p.img_1" width="35px" height="35px" alt="Photo de produit" ></td>
+        <th scope="row"  style="font-size: small;"><a class="btnsearch" [routerLink]="['/products', p._id , currentuser._id ]"  >{{p.name}}</a></th>
+        <!-- <td style="font-size: small;">{{p.price | currency : 'MAD'}}</td> -->
+        </tr>
+      </tbody>
+      </table>
+      </div>
+    </li>
+    
+</ul></div></nav>
+
+<div class="col-xs-12 col-sm-12 col-xs-offset-2 col-lg-12 ml-lg-1 h-100 " >
+  <!-- <div class="wrapper">
+  <ngx-skeleton-loader  *ngIf="!contentLoaded" count="1" [theme]="{
+    width: '380px',
+    'margin-top': '40px',
+    'border-radius': '2',
+     height: '35px',
+    'margin-bottom': '20px'
+  }"></ngx-skeleton-loader></div><div class="wrapper">
+  <ngx-skeleton-loader  *ngIf="!contentLoaded" count="1" [theme]="{
+    width: '250px',
+    'border-radius': '2',
+    height: '35px',
+    'margin-bottom': '20px'
+  }"></ngx-skeleton-loader></div><div class="wrapper">
+  <ngx-skeleton-loader  *ngIf="!contentLoaded" count="1" [theme]="{
+    width: '350px',
+    'border-radius': '3',
+    height: '35px',
+    'margin-bottom': '10px'
+  }"></ngx-skeleton-loader></div> -->
+ 
+  <!-- <h4 class="font_bold "  >Trouver tout en un seul endroit <span *ngIf="isLoggedIn">{{currentuser.prenom}}</span> avec <span style="color: #e1ee6b;">COPRA</span></h4> -->
+  <!-- <p class="  mt-0"><small class="font_light blockquote-footer">Avec COPRA vous pouvez trouver tout les categories de produits avec un seul click.</small></p> -->
+  <ngx-slick class="carousel  mt-lg-3  " [config]="slideConfig">
+  
+    <div ngxSlickItem class="slide ">
+      <div   class="card border-0 w-100 mr-lg-4 bg-transparent" style="background-image: url(assets/images/jambo1.png); background-position: center; background-repeat: no-repeat; background-size: cover;  border-radius:37px; height:600px;  ">
+    <div class="text-center d-flex align-items-center py-5 px-4 my-5">
+        <div>
+           <!--  <h1 class="font-bold text-dark">COPRA#original</h1>
+            <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat,
+                laboriosam, voluptatem, optio vero odio nam sit officia accusamus
+                minus error nisi architecto nulla ipsum dignissimos. Odit sed qui,
+                dolorum!.</p>
+            <a class="btn btn-outline-white"><i class="fa fa-clone left"></i> View project</a> -->
+        </div>
+    </div>
+</div></div>
+<div ngxSlickItem class="slide ">
+  <div   class="card border-0 w-100 mr-lg-4 bg-transparent" style="background-image: url(assets/images/jambo2.png); background-position: center; background-repeat: no-repeat; background-size: cover;  border-radius:37px; height:600px;  ">
+<div class="text-center d-flex align-items-center py-5 px-4 my-5">
+    <div>
+       <!--  <h1 class="font-bold text-dark">COPRA#original</h1>
+        <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat,
+            laboriosam, voluptatem, optio vero odio nam sit officia accusamus
+            minus error nisi architecto nulla ipsum dignissimos. Odit sed qui,
+            dolorum!.</p>
+        <a class="btn btn-outline-white"><i class="fa fa-clone left"></i> View project</a> -->
+    </div>
 </div>
+</div></div>
+ </ngx-slick>
+ <!-- <ngx-slick class="carousel mt-4 " [config]="slideConfig2">
+ <div class="row ml-lg-3">
+  
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="col-xs-1-12 slide ml-2">
+    <div class="card border-dark " style="border-radius: 14px;">
+      <div class="card-body">
+        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="100px" height="50px" alt="">
+        <h3 class="card-title font_bold mb-1 mt-2" style="font-size: small;">Apple2 Tv</h3>
+        <p class="card-text nbr_font font_bold" style="font-size: small; background-color: #e4ff64; border-radius: 20px;">3500MAD</p>
+      </div>
+    </div>
+  </div>
+
+</div></ngx-slick> -->
+</div>
+
+
+  </div>
+

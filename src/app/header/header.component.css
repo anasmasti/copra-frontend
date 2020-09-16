@@ -1,0 +1,25 @@
+.cartnum{
+    color: red;
+    font-size: 14px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-weight: 700;
+    border-radius: 100%;
+    position: relative;
+    top: -6px;
+}
+.cart{
+    background-color: #e9ff6b ;
+    border-style: solid;
+    border-color: rgb(168, 168, 168);
+    border-radius: 5px;
+    border-width: .1px;
+    padding: 3px;
+
+}.cart:hover{
+    background-color:rgb(43, 43, 43) ;
+    color: #e9ff6b !important;
+}
+.round{
+    border-radius: 25px;
+}
+

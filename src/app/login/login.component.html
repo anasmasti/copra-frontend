@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<div class="login-block">
+    <div class="container">
+	<div class="row">
+		<div class="col-md-4 login-sec">
+		    <h2 class="text-center">Connecte-toi maintenant</h2>
+	<form class="login-form " style="margin-top: 60px;"  [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <div class="form-group">
+    <input type="email" id="email" formControlName="email"  required [ngClass]="{'is-invalid': email.invalid, 'is-valid': !email.invalid }"  class="form-control rounded-pill" placeholder="Votre Email">
+    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+    class="alert alert-danger validationerrorstyle">
+
+  <div *ngIf="email.errors.required">
+    email is required.
+  </div>
+  <div *ngIf="email.errors.email">
+    email must be email.
+  </div>
+  </div>
+  </div>
+  <div class="form-group">
+    <input type="password" id="password"  required [ngClass]="{'is-invalid': password.invalid, 'is-valid': !password.invalid }"  formControlName="password" class="form-control rounded-pill" placeholder="Votre mot de passe">
+    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="alert alert-danger validationerrorstyle">
+
+  <div *ngIf="password.errors.required">
+    password is required.
+  </div>
+  <div *ngIf="password.errors.minlength">
+    password must be plus de 6 char.
+  </div>
+  </div>
+  </div>
+ 
+    <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input">
+      <small>Remember Me</small>
+     </label>
+     <button type="submit" [ngClass]="{'disabled': loginForm.invalid}" class="btn btn-sm btncommande rounded-pill shadow float-right font_bold text-uppercase">Se Connecter</button>
+   </div>
+  
+</form>
+<div class="copy-text">Copyright 2020 <i class="fas fa-copyright"></i> COPRA</div>
+		</div>
+	<div class="col-md-8 banner-sec">
+         
+	</div>
+</div>
+</div>
+</div>

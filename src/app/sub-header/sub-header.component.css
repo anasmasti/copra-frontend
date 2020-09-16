@@ -1,0 +1,111 @@
+.myul{
+      position: relative;
+      transform: translate(-50%, -50%);
+      display: flex;
+      margin-top: -20px;
+    }
+.myul .myli{
+  list-style: none;
+  margin: 0 10px;
+  }
+ .myul .myli .fa{
+  font-size: 15px;
+  color: #262626;
+  line-height: 5px;
+  transition: .5s;
+  }
+.myul .myli a{
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  text-align: center;
+  transform: perspective(100px) rotate(-30deg) skew(25deg) translate(0,0);
+  transition: .5s;
+  box-shadow: -20px 20px 10px rgb(0, 0, 0, 0.5);
+  }
+.myul .myli a::before{
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -20px;
+  height: 100%;
+  width: 20px;
+  background: #b1b1b1;
+  transition: .5s;
+  transform: rotate(0deg) skewY(-45deg);
+  }
+.myul .myli a::after{
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -11px;
+  height: 20px;
+  width: 100%;
+  background: #b1b1b1;
+  transition: .5s;
+  transform: rotate(0deg) skewX(-45deg);
+  }
+.myul .myli a:hover{
+  transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(5px, -5px);
+  box-shadow: -50px 50px 50px rgb(0, 0, 0, 0.5);
+  }
+.myul .myli:hover .fa{
+  color: #fff;
+  }
+.myul .myli a:hover{
+  transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(5px, -5px);
+  box-shadow: -50px 50px 50px rgb(0, 0, 0, 0.5);
+  }
+.myul .myli:hover:nth-child(1) a{
+  background: #3b5999;
+  }
+.myul .myli:hover:nth-child(1) a:before{
+  background: #2e4a86;
+  }
+.myul .myli:hover:nth-child(1) a:after{
+  background: #4a69ad;
+  }
+.myul .myli:hover:nth-child(2) a{
+  background: #55acee;
+  }
+  .myul .myli:hover:nth-child(2) a:before{
+  background: #4184b7;
+  }
+  .myul .myli:hover:nth-child(2) a:after{
+  background: #4d9fde;
+  }
+  .myul .myli:hover:nth-child(5) a{
+  background: #e6011c;
+  }
+  
+  .myul .myli:hover:nth-child(5) a:before{
+  background: #e6011c;
+  }
+  .myul .myli:hover:nth-child(5) a:after{
+  background: #e6011c;
+  }
+  
+  .myul .myli:hover:nth-child(4) a{
+  background: #e6011c;
+  }
+  
+  .myul .myli:hover:nth-child(4) a:before{
+  background: #c70017;
+  }
+  .myul .myli:hover:nth-child(4) a:after{
+  background: #e6011c;
+  }
+  
+  .myul .myli:hover:nth-child(3) a{
+  background: linear-gradient(#400080, transparent), linear-gradient(200deg, #d047d1, #ff0000, #ffff00);
+  }
+  
+  .myul .myli:hover:nth-child(3) a:before{
+  background: linear-gradient(#400080, transparent), linear-gradient(200deg, #d047d1, #ff0000, #ffff00);
+  }
+  .myul .myli:hover:nth-child(3) a:after{
+  background: linear-gradient(#400080, transparent), linear-gradient(200deg, #d047d1, #ff0000, #ffff00);
+  }
+

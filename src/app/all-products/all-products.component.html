@@ -1,29 +1,114 @@
 <app-header></app-header>
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <h1 class="display-4 font-weight-normal">Punny headline</h1>
-      <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
-      <a class="btn btn-outline-secondary" href="#">Coming soon</a>
-    </div>
-    <div class="product-device box-shadow d-none d-md-block"></div>
-    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+<div class=" w-100">
+  <div id="clockdiv">
+  <h3 class="time_messege " style="display: inline-block; color:#fff;"><b>Code de Coupon <span class="offercopy font_Inter_Black" id="copy_text" onclick="copyToClipboard('#copy_text')" data-toggle="tooltip" title="Code de coupon copié dans le presse-papiers. Utilisez ce coupon lors du paiement.">10% off</span>
+    expire dans </b>
+  </h3>
+  <div>
+     <div class="smalltext text-capitalize">Jours</div>
+     <span class="days "></span>
+  </div>
+  <span class="dot_time">:</span>
+  <div>
+     <div class="smalltext text-capitalize">Heurs</div>
+     <span class="hours "></span>
+  </div>
+  <span class="dot_time">:</span>
+  <div>
+     <div class="smalltext text-capitalize ">Minutes</div>
+     <span class="minutes "></span>
+  </div>
+  <span class="dot_time">:</span>
+  <div>
+     <div class="smalltext text-capitalize ">Secondes</div>
+     <span class="seconds "></span>
+  </div>
+  <div><a href="#" class="footr_buy font_Inter_Black">ACHETER MAINTENANT</a></div>
+</div>
 </div>
 
-<div class="container col-12">
-<div class="row" >
-  <div class="col-lg-4 col-sm-12 mt-3 " *ngFor="let product of products">
-    <div class="bg-{{product.bg_color}} mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5">{{ product.name }}</h2>
-        <p class="lead">{{ product.quick_name }}</p>
-        <p class="lead">{{ product.prix }}</p>
-      </div>
-      <div>
-        <img src="assets/images/logomyshop.png" draggable="false" class="imgproduct">
-      </div>
-    </div>
-  </div>
 
 
+<div class="jumbotron bg-danger text-light jumbotron-fluid ">
+  <div class="container">
+    <h1 class="display-4 font_bold">Profiter de <samp class="nbr_font" style="color: #e4ff4b;">-70%</samp> maintenant </h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
   </div>
 </div>
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar">
+    <div class="custom-menu">
+      <button type="button" id="sidebarCollapse" class="btn btn-light border-light">
+        <i class="fas fa-bars"></i>
+        <span class="sr-only">Toggle Menu</span>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font_bold">Categories </h3>
+      <ul class="list-unstyled components mt-4" >
+        <a (click)="getprodbycat('5f3d1e6d8b3dd62824bebb9d')" ><span class="fa fa-home mr-2"></span>tout</a>
+
+        <li *ngFor="let c of categories" >
+          <a (click)="getprodbycat(c._id)"  ><span class="fa fa-home mr-2"></span>{{c.title}}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    <!-- Page Content  -->
+  <div id="content" class="p-5 p-md-5 pt-5">
+    <!-- <div class=" text-center bg-light">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-6">Nos Produits</h1>
+        <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+        <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+      </div>
+      <div class="product-device box-shadow d-none d-md-block"></div>
+      <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+  </div> -->
+  <div class="row p-5">
+    <div   class="col-lg-3 col-sm-12" *ngFor="let pbc of probycategories" >
+    <div class="product-grid " >
+        <div class="product-image" >
+            <a style="cursor: pointer;" [routerLink]="['/products',pbc._id]" >
+                <img class="pic-1" src="{{ pbc.img_1}}" >
+                <img class="pic-2" src="{{ pbc.img_3}}">
+            </a>
+            <ul class="social" >
+                <li><a href=""  data-tip="Aperçu rapide"><i class="fa fa-search"></i></a></li>
+                <li><a href="" [class.disabled] = "pbc.quantity < 1"  data-tip="Mettre dans cart"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+            <span class="product-new-label font_bold">EN STOCK</span>
+            <span class="product-discount-label nbr_font font_bold" style="font-size: 13px;">-20%</span>
+        </div>
+        <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star disable"></li>
+        </ul>
+        <div class="product-content">
+            <h3 class="title"><a style="cursor: pointer;"   [routerLink]="['/products',pbc._id,currentuser._id ]" >{{ pbc.name }}</a></h3>
+            <div class="price">{{ pbc.price | currency : 'MAD'}}
+                <span>{{ pbc.price_off | currency : 'MAD'}}</span>
+            </div>
+            <!-- <a class="add-to-cart" href="">+ Ajouter au panier</a> -->
+        </div>
+   
+    </div>
+</div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+

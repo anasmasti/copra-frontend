@@ -1,0 +1,159 @@
+<app-header></app-header>
+
+<div class="login-block">
+ <div class="container">
+ <div class="row">
+ <div class="col-md-6 login-sec"> 
+ <h2 class="text-center">Crée ton compte maintenant</h2>
+ <form class="login-form mt-5" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+    <div class="row">
+ <div class="form-group col">
+     <input type="text" class="form-control rounded-pill" [ngClass]="{'is-invalid': nom.invalid, 'is-valid': !nom.invalid }" id="nom" formControlName="nom" placeholder="Enter name" required>
+     <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="nom.errors.required">
+    nom is required.
+   </div>
+   <div *ngIf="nom.errors.minlength">
+    nom invqlide.
+   </div>
+   </div>
+ </div>
+
+ <div class="form-group col">
+     <input type="text" class="form-control rounded-pill" [ngClass]="{'is-invalid': prenom.invalid, 'is-valid': !prenom.invalid }" id="prenom" formControlName="prenom" placeholder="Enter prenom" required>
+     <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="prenom.errors.required">
+    prenom is required.
+   </div>
+   <div *ngIf="prenom.errors.minlength">
+    prenom invalid.
+   </div>
+   </div>
+ </div>
+</div>
+ <div class="form-group">
+     <input type="email" class="form-control rounded-pill" [ngClass]="{'is-invalid': email.invalid, 'is-valid': !email.invalid }" id="email" formControlName="email" placeholder="Enter email" required>
+     <div *ngIf="email.invalid && (email.dirty || email.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="email.errors.required">
+     email is required.
+   </div>
+   <div *ngIf="email.errors.email">
+     email must be email.
+   </div>
+   </div>
+ </div>
+ <div class="row">
+ <div class="form-group col">
+     <input type="password"  class="form-control rounded-pill" [ngClass]="{'is-invalid': password.invalid, 'is-valid': !password.invalid }" id="password" formControlName="password" placeholder="Mot de passse" required>
+     <div *ngIf="password.invalid && (password.dirty || password.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="password.errors.required">
+    password is required.
+   </div>
+   <div *ngIf="password.errors.minlength">
+    password must be plus than 6.
+   </div>
+   </div>
+ </div>
+
+ <div class="form-group col">
+    <input type="password" class="form-control rounded-pill" [ngClass]="{'is-invalid': confirmepassword.invalid, 'is-valid': !confirmepassword.invalid }" id="confirmepassword" formControlName="confirmepassword" placeholder="Confirmer le mot de passe" required>
+    <div *ngIf="confirmepassword.invalid && (confirmepassword.dirty || confirmepassword.touched)"
+    class="alert alert-danger validationerrorstyle">
+
+  <div *ngIf="confirmepassword.errors.required">
+   confirm password is required.
+  </div>
+  <div *ngIf="confirmepassword.errors.notSame">
+   password unmatch
+  </div>
+  </div>
+</div>
+</div>
+ <div class="form-group">
+     <input type="text" class="form-control rounded-pill" [ngClass]="{'is-invalid': telephone.invalid, 'is-valid': !telephone.invalid }" id="telephone" formControlName="telephone" placeholder="telephone" required>
+     <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)"
+     class="alert alert-danger validationerrorstyle">
+   <div *ngIf="telephone.errors.required">
+     tele is required.
+   </div>
+   <div *ngIf="telephone.errors.pattern">
+    telephone invalide.
+  </div>
+   </div>
+ </div>
+ <div class="row">
+ <div class="form-group col">
+    <select class="form-control rounded-pill" formControlName="sexe" id="sexe" required [ngClass]="{'is-invalid': sexe.invalid, 'is-valid': !sexe.invalid }">
+        <option [ngValue]="null" disabled>sexe</option>
+        <option value="mal">Mal</option>
+        <option value="femme">Femme</option>
+        <option value="autre">Autre</option>
+      </select>
+     <div *ngIf="sexe.invalid && (sexe.dirty || sexe.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="sexe.errors.required">
+     sexe is required.
+   </div>
+   </div>
+ </div>
+
+ <div class="form-group col ">
+    <select class="form-control rounded-pill" formControlName="ville" required id="ville" [ngClass]="{'is-invalid': ville.invalid, 'is-valid': !ville.invalid }">
+        <option [ngValue]="null" disabled>Ville</option>
+        <option value="casa">casa</option>
+        <option value="rabat" >rabat</option>
+        <option value="marrakech">marrakech</option>
+        <option value="london">london</option>
+      </select>
+     <div *ngIf="ville.invalid && (ville.dirty || ville.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="ville.errors.required">
+    ville is required.
+   </div>
+   </div>
+ </div>
+
+ <div class="form-group col">
+    <input type="text" class="form-control rounded-pill" [ngClass]="{'is-invalid': codepostal.invalid, 'is-valid': !codepostal.invalid }" id="codepostal" formControlName="codepostal" placeholder="Code postale" required>
+    <div *ngIf="codepostal.invalid && (codepostal.dirty || codepostal.touched)"
+    class="alert alert-danger validationerrorstyle">
+
+  <div *ngIf="codepostal.errors.required">
+    codepostal is required.
+  </div>
+  </div>
+</div>
+ </div>
+
+ <div class="form-group">
+     <input type="text" class="form-control rounded-pill" [ngClass]="{'is-invalid': addressedelivraison.invalid, 'is-valid': !addressedelivraison.invalid }" id="addressedelivraison" formControlName="addressedelivraison" placeholder="addressedelivraison" required>
+     <div *ngIf="addressedelivraison.invalid && (addressedelivraison.dirty || addressedelivraison.touched)"
+     class="alert alert-danger validationerrorstyle">
+ 
+   <div *ngIf="addressedelivraison.errors.required">
+    addresse de livraison is required.
+   </div>
+   </div>
+ </div>
+ 
+ <button type="submit" [ngClass]="{'disabled': registerForm.invalid}" class="btn btn-sm btncommande mt-3 rounded-pill shadow mb-lg-5 font_bold text-uppercase">  S'enregistrer  <i class="fas fa-long-arrow-right"> </i></button>
+  
+</form>
+<div class="copy-text">Copyright 2020 <i class="fas fa-copyright"></i> COPRA</div>
+		</div>
+	<div class="col-md-6 banner-sec">
+         
+	</div>
+</div>
+</div>
+</div>

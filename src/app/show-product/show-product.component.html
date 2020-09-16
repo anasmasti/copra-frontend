@@ -1,1 +1,159 @@
-<p>show-product works!</p>
+<app-header></app-header>
+<div class="container p-5 mt-3" >
+ <div class="alert alert-info" >
+     <h4 class="alert-heading font_bold">COVID-19</h4>
+     <p>Message à l’ensemble de nos partenaires, clients, prestataires</p>
+</div>
+<nav aria-label="breadcrumb " >
+  <ol class="breadcrumb bg-light font_normale">
+    <li class="breadcrumb-item "><a [routerLink]="['/']">Accueil</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/all-products']">Produits</a></li>
+    <li class="breadcrumb-item " aria-current="page">{{ products?.name }}</li>
+  </ol>
+</nav>
+
+<nav class="navbar float-right navbar-light bg-transparent">
+  <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-ellipsis-v"></i>
+  </button>
+</nav>   
+<div class="collapse float-right mt-2" id="navbarToggleExternalContent">
+  <div class="bg-transparent p-0">
+    <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
+      <h6 class="font_bold"><i class="fas fa-share"></i> Partager</h6>
+      <div class="f_social_icon">
+          <a href="#" class="fab fa-facebook shadow"></a>
+          <a href="#" class="fab fa-twitter shadow"></a>
+          <a href="#" class="fab fa-instagram shadow"></a>
+          <a href="#" class="fab fa-pinterest shadow"></a>
+      </div>
+      <h6 class="font_bold mt-4"><i class="fas fa-heart"></i> Mes favoris</h6>
+      <button class="btn btn-light btn-sm rounded-pill shadow" style="font-size: 10px;"><i class="fas fa-plus"></i> Mettre ce produit comme favori</button>
+      <h6 class="font_bold mt-4"><i class="fas fa-comment"></i> Commentaires</h6>
+      <button class="btn btn-light btn-sm rounded-pill shadow" style="font-size: 10px;"><i class="fas fa-plus"></i> Ajouter commantaire</button>
+
+  </div>
+  </div>
+</div>
+<div class="row mt-5">
+     <div class="col-md-6">
+         <div class="preview">
+             <div class="preview-pic tab-content">
+               <div class="tab-pane active" id="pic-1"><img src="{{ products?.img_1 }}" /></div>
+               <div class="tab-pane" id="pic-2"><img src="{{ products?.img_2 }}" /></div>
+               <div class="tab-pane" id="pic-3"><img src="{{ products?.img_3 }}" /></div>
+               <div class="tab-pane" id="pic-4"><img src="{{ products?.img_4 }}" /></div>
+               <div class="tab-pane" id="pic-5"><img src="{{ products?.img_5 }}" /></div>
+             </div>
+             <ul class="preview-thumbnail nav nav-tabs">
+               <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ products?.img_1 }}" /></a></li>
+               <li><a data-target="#pic-2" data-toggle="tab"><img src="{{ products?.img_2 }}" /></a></li>
+               <li><a data-target="#pic-3" data-toggle="tab"><img src="{{ products?.img_3 }}" /></a></li>
+               <li><a data-target="#pic-4" data-toggle="tab"><img src="{{ products?.img_4 }}" /></a></li>
+               <li><a data-target="#pic-5" data-toggle="tab"><img src="{{ products?.img_5 }}" /></a></li>
+             </ul>
+             
+         </div>
+     </div>
+     <div class="col-md-6">
+         <div class="product-dtl">
+             <div class="product-info">
+                 <div class="product-name font_bold">{{ products?.name }}</div>
+                 <div class="reviews-counter">
+                     <div class="rate">
+                         <input type="radio" id="star5" name="rate" value="5" checked />
+                         <label for="star5" title="text">5 stars</label>
+                         <input type="radio" id="star4" name="rate" value="4" checked />
+                         <label for="star4" title="text">4 stars</label>
+                         <input type="radio" id="star3" name="rate" value="3" checked />
+                         <label for="star3" title="text">3 stars</label>
+                         <input type="radio" id="star2" name="rate" value="2" />
+                         <label for="star2" title="text">2 stars</label>
+                         <input type="radio" id="star1" name="rate" value="1" />
+                         <label for="star1" title="text">1 star</label>
+                       </div>
+                     <span class="nbr_font">{{ products?.nbr_buyers }} achetés</span>
+                 </div>
+             <div class="product-price-discount font_bold nbr_font"><span>{{ products?.price | currency : 'MAD' }}</span><span class="line-through nbr_font">{{ products?.price_off | currency : 'MAD' }}</span> <span class="float-right mt-2" style="font-size:x-small; color:rgb(180, 180, 180);">Ctegory : {{ products?.category.title }}   |   quantité : {{ products?.quantity }}   |   en stock : {{ products?.en_stock }} </span></div>
+             </div>
+             <p>{{ products?.short_description }}</p>
+             <div class="col-12">
+                  <form [formGroup]="orderForm"  (ngSubmit)="addorder()">
+                    <div class="form-row form-group">
+                      
+                     <label for="size">Size</label>
+                     <select id="size" name="size" class="form-control form-group rounded-pill  ">
+                         <option>S</option>
+                         <option>M</option>
+                         <option>L</option>
+                         <option>XL</option>
+                     </select>
+                
+                     <label for="color" class="mt-1">Color</label>
+                     <select id="color" name="color" class="form-control form-group rounded-pill  ">
+                         <option>Blue</option>
+                         <option>Green</option>
+                         <option>Red</option>
+                     </select>
+                     
+                     <label for="qt" class="mt-1">Quantité <span class="badge badge-pill badge-danger" *ngIf="quantitystatut">Tu dois choisir la quantité</span> </label>
+                     <input type="number" id="myquan"  formControlName="quantity" class="form-control rounded-pill" [value]="1" required>
+                 </div>
+                    <input type="hidden" id="adr" [value]="currentuser.addressedelivraison">
+                    <input type="hidden" id="prix" [value]="products?.price">
+                    <input type="hidden" id="myprod" [value]="products?._id" >
+                    <div class="form-row form-group"> 
+                    <ngx-paypal class="btn-block btn-sm"  [config]="payPalConfig2" ></ngx-paypal>
+                    <button  type="button"  data-toggle="modal" data-target="#exampleModalCenter"  class=" btn btn-sm rounded-pill  border-0 shadow p-2 mt-2 font_bold btncommande btn-block" ><i class="fas fa-money-bill-wave"></i>  Commander directement</button>           
+                    <div class="btn-group  mt-2 w-100" role="group" >                    
+                    <a type="button" style="font-size: 12px;" target="_blank" href="https://wa.me/212660548100?text=je suis intéressé par ce produit: http://localhost:4200/products/{{products?._id}}/5f4a30971cce3907b663cee0" class="form-control btn btn-sm  rounded-pill shadow  font_bold btn-success btn-block mt-0" ><i class="fab fa-whatsapp"></i>  Par WhatsApp</a>
+                    <button (click)="sharefacebook()" type="button" style="font-size: 12px;" class="form-control btn btn-sm  rounded-pill shadow  font_bold btn-primary btn-block mt-0" ><i class="fab fa-facebook-f"></i>  Par Facebook</button>
+                    <button type="submit" style="font-size: 12px;"  class="form-control  btn btn-dark btn-sm rounded-pill font_bold shadow" [class.disabled] = "products?.quantity < 1" ><i class="fas fa-shopping-bag"></i>   {{ products?.quantity < 1 ? "Tout est vondus" : "Mettre au panier" }}</button>
+                    </div>
+                    </div>
+                    <input formControlName="user" type="hidden" required >
+                    <input formControlName="product" type="hidden" required>
+                    </form>
+             </div>
+             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered" role="document">
+                 <div class="modal-content border-light" style="border-radius: 19px;">
+                   <div class="modal-header">
+                     <h2 class="modal-title font_bold" id="exampleModalCenterTitle">Validation du commande</h2>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+                   <div class="modal-body">
+                     Vous etes d'accord pour cette commande ?
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-light rounded-pill font_bold shadow" data-dismiss="modal" style="font-size: 14px;">Non, Fermer</button>
+                     <button type="button" (click)="addorderdetail2()" data-dismiss="modal" class="btn rounded-pill shadow btncommande font_bold" style="font-size: 14px;">Oui, Commander</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class="product-info-tabs">
+     <ul class="nav nav-tabs" id="myTab" role="tablist">
+           <li class="nav-item">
+             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Plus d'information</a>
+           </li>
+     </ul>
+     <div class="tab-content" id="myTabContent">
+           <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+             {{ products?.description }}
+           </div>
+           <div class="tab-pane fade show " id="info" role="tabpanel" aria-labelledby="info-tab">
+             {{ products?.name }}
+           </div>
+     </div> 
+     <app-comment></app-comment>
+        </div>
+</div>

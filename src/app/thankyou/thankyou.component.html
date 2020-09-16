@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="container p-5 mt-5 text-center w-100 h-75 ">
+  <h1 class="text-uppercase font_bold display-1">Merci <strong class="text-uppercase">{{onlineUser.prenom}} !</strong></h1>
+  <img src="https://assets.aws.shawdirect.ca/uploadedimages/shawdirect/content/supportsection/images/green%20checkmark.png" width="80px" height="80px" alt="">
+  <p class="mt-5"> On va traiter votre commande et on va t'appeler par la suite pour la validation de votre commande, Merci </p>
+  <button class="btn btn-sm btn-light rounded-pill shadow font_bold mt-3" [routerLink]="['/all-products']"  > Continuer à shopper </button>
+  <button class="btn btn-sm btncommande rounded-pill shadow font_bold mt-3 ml-3" [routerLink]="['/profile',onlineUser._id ]" >Suivie mes commandes</button> 
+</div>
+
