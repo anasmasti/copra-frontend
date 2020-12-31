@@ -1,13 +1,11 @@
 
-
-
 .grid figure {
     position: relative;
     float: left;
     overflow: hidden;
     text-align: center;
     cursor: pointer;
-    background-color:#1b1b1b ;
+    background:linear-gradient(rgba(0, 0, 0, 0.912), rgba(0, 0, 0, 0)) ;
     border-radius: 20px;
 }
 
@@ -69,8 +67,6 @@
     letter-spacing: 1px;
     font-size: 68.5%;
 }
-
-
 
 figure.effect-ravi {
     background: #2c2c2c;
@@ -182,4 +178,41 @@ figure.effect-ravi:hover p i:empty {
     /* just because it's stronger than nth-child */
     opacity: 1;
 }
-
+.bg_amour{
+    background-image: linear-gradient(rgba(39, 39, 39, 0.72), rgba(0, 0, 0, 0.083)), url("https://images.unsplash.com/photo-1517856713891-215e57a13c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"); 
+    background-color: #272727; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 27px;
+  }
+.bg_electro{
+  background: rgb(36,0,22);
+  background: linear-gradient(54deg, rgba(36,0,22,1) 0%, rgba(233,158,255,1) 0%, rgba(95,117,255,1) 100%);
+  border-radius: 27px;}  
+.bg_maison{
+  background: rgb(36,0,22);
+  background: linear-gradient(54deg, rgba(36,0,22,1) 0%, rgba(158,255,210,1) 0%, rgba(2,144,88,1) 100%);
+  border-radius: 27px;}    
+.bg_beaute{
+  background: rgb(36,0,22);
+  background: linear-gradient(54deg, rgba(36,0,22,1) 0%, rgba(255,158,243,1) 0%, rgba(255,31,31,1) 100%);
+  border-radius: 27px;}    
+.bg_bebe{
+  background: rgb(36,0,22);
+  background: linear-gradient(54deg, rgba(36,0,22,1) 0%, rgba(228,231,10,1) 0%, rgba(238,155,52,1) 100%);
+  border-radius: 27px;}   
+@media only screen and (min-width: 320px) and (max-width: 480px){
+   .h3{margin-top:30px;font-size:20px;}
+   .imgbycat{height: 280px !important;}
+   .fix-slid-mobile{width: 370px;}
+   .cadaux_amour_maket{width: 370px;}
+   .cat_maket{width: 370px;}
+    }
+@media only screen and (min-width: 480px) and (max-width: 768px){
+  .h3{ margin-top: 30px;font-size:20px;}
+  .imgbycat{height: 280px !important;}
+  .fix-slid-mobile{width: 300px;}
+  .cadaux_amour_maket{width: 370px;}
+  .cat_maket{width: 370px;}
+  }

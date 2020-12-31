@@ -1,65 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-light ">
-        <a class="navbar-brand p-3 border-dark  ml-5" href="/"><img src="/assets/images/coprashoplogo.png" width="143px" height="35px" alt="COPRA"> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse justify-content-center navbar-collapse" id="navbarNav">
-        <ul class=" nav navbar-nav  mt-1 font_normale" >
-            <div class="nav-item ml-lg-5"></div>
-            <li class="nav-item ">
-            <a class="nav-link " [routerLink]="['/']">Accueil</a> 
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item"  [routerLinkActive]="['active']">
-            <a class="nav-link" [routerLink]="['/about']" >About</a>
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item"  [routerLinkActive]="['active']">
-            <a class="nav-link" [routerLink]="['/all-products']" >Produits</a>
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item" [routerLinkActive]="['active']">
-            <a class="nav-link " [routerLink]="['/aa']" >Tendance</a>
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item"  [routerLinkActive]="['active']">
-            <a class="nav-link " [routerLink]="['/vv']" >Nouveauté</a>
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item"  [routerLinkActive]="['active']">
-             <a class="nav-link " [routerLink]="['/dd']" >Blogues</a>
-            </li>
-            <div class="nav-item"></div>
-            <li class="nav-item" [routerLinkActive]="['active']">
-             <a class="nav-link " [routerLink]="['/contact']" >Contact</a>
-            </li>
-           
-        </ul></div>
-        <div class="collapse justify-content-center navbar-collapse"  id="navbarNav" >
-        <ul class=" nav navbar-nav ml-auto mt-1 " >
-            <li class="nav-item" >
-                <button type="button" class="btn btn-sm btncommande font_bold rounded-pill shadow mr-2" [routerLink]="['/cart', currentuser._id]">
-                  <i class="fas fa-shopping-bag"></i> Panier <span class="badge badge-danger nbr_font badge-pill">{{count}}</span>
-                  </button>
-             </li>
-             <li class="nav-item " >
-              <div class="btn-group " *ngIf="!isLoggedIn">
-                <button type="button"   class="btn btn-dark btn-sm  round shadow font_bold" [routerLink]="['/register']">
-                    <i class="fa fa-user" aria-hidden="true"></i> Crée un compte
-                  </button>
-                  <button type="button"  class="btn  btn-sm btn-primary  round shadow font_bold" [routerLink]="['/login']">
-                    <i class="fas fa-sign-in-alt"></i> Se connecter
-                  </button></div> 
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand p-lg-3 border-dark   ml-lg-5" href="/"><img src="https://firebasestorage.googleapis.com/v0/b/copra-shop.appspot.com/o/coprashoplogo.png?alt=media&token=0a7aafab-94d0-4d5a-8b09-7b0b4a3df1c8" class="logo" alt="COPRA"> </a>
+  <button type="button" class="btn btn-sm btncommande hide_in_dt font_bold rounded-pill shadow mr-0" [routerLink]="['/cart', currentuser._id]">
+    <i class="fas fa-shopping-bag"></i> Panier <span class="badge badge-danger nbr_font badge-pill">{{count}}</span>
+    </button>
+  <button class="navbar-toggler" class="border-0 bg-transparent hide_in_dt" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <i class="fas fa-bars fa-2x"></i>
+  </button>
+  <div class="collapse justify-content-center navbar-collapse" id="navbarNav">
+  <ul class=" nav navbar-nav  mt-1 font_normale" >
+      <div class="nav-item ml-lg-3"></div>
+      <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/']">Accueil</a> 
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item"  [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/about']" >À Propos</a>
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item"  [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/all-products']" >Produits</a>
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link " href="#trding" >Tendance</a>
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item"  [routerLinkActive]="['active']">
+      <a class="nav-link " href="#nv" >Nouveauté</a>
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item"  [routerLinkActive]="['active']">
+       <a class="nav-link " href="#blogue" >Blogues</a>
+      </li>
+      <div class="nav-item"></div>
+      <li class="nav-item" [routerLinkActive]="['active']">
+       <a class="nav-link " [routerLink]="['/contact']" >Contact</a>
+      </li>
+     
+  </ul></div>
+  <div class="collapse justify-content-center navbar-collapse"  id="navbarNav" >
+  <ul class=" nav navbar-nav ml-auto mt-1 " >
+      <li class="nav-item " >
+          <button type="button" class="btn btn-sm btncommande hide_in_mobile  font_bold rounded-pill shadow mr-2" [routerLink]="['/cart', currentuser._id]">
+            <i class="fas fa-shopping-bag"></i> Panier <span class="badge badge-danger nbr_font badge-pill">{{count}}</span>
+            </button>
+       </li>
+       <li class="nav-item " >
+        <div class="btn-group " *ngIf="!isLoggedIn">
+          <button type="button"   class="btn btn-dark btn-sm  round shadow font_bold" [routerLink]="['/register']">
+              <i class="fa fa-user" aria-hidden="true"></i> Crée un compte
+            </button>
+            <button type="button"  class="btn  btn-sm btn-primary  round shadow font_bold" [routerLink]="['/login']">
+              <i class="fas fa-sign-in-alt"></i> Se connecter
+            </button></div> 
 
-                  <div class="btn-group font_bold" *ngIf="isLoggedIn">
-                  <button  type="button" class="btn btn-dark btn-sm  round shadow font_bold " [routerLink]="['/profile/', currentuser._id ]">
-                    <i class="fa fa-user" aria-hidden="true"></i>   {{currentuser.prenom}}  {{currentuser.nom}}
-                  </button>
-             
-                  <button type="button"  class="btn btn-sm btn-danger round shadow text-right" (click)="dologout()"><i class="fas fa-sign-out-alt"></i></button>
-              </div>  </li>       
-        </ul>
-    </div>
+            <div class="btn-group font_bold" *ngIf="isLoggedIn">
+            <button  type="button" class="btn btn-dark btn-sm  round shadow font_bold " [routerLink]="['/profile/', currentuser._id ]">
+              <i class="fa fa-user" aria-hidden="true"></i>   {{currentuser.prenom}}  {{currentuser.nom}}
+            </button>
+       
+            <button type="button"  class="btn btn-sm btn-danger round shadow text-right" (click)="dologout()"><i class="fas fa-sign-out-alt"></i></button>
+        </div>  </li>       
+  </ul>
+ </div>
         
  </nav>
  

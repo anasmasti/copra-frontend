@@ -4,6 +4,11 @@ import { MyAuthService } from '../services/auth.service';
 import { ProductService } from '../services/product.service';
 import { CurrentUser } from '../models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OrderService } from '../services/order.service';
+import { ToastrService } from 'ngx-toastr';
+import { FacebookService, UIParams, UIResponse, InitParams } from 'ngx-facebook';
+import { ApiUrl } from '../models/api-url.model';
+
 
 
 @Component({
@@ -16,16 +21,25 @@ export class AllProductsComponent implements OnInit {
   isLoggedIn = false;
   currentuser;
   categories: any;
-  catid
+  catid;
   probycategories: any;
-  constructor(private actRoute: ActivatedRoute,public router: Router, private http: HttpClient,private myserv: ProductService,  public authService: MyAuthService) { }
+  p;
+  constructor(private fb: FacebookService,private toastr: ToastrService,  private orderservice: OrderService, private actRoute: ActivatedRoute,public router: Router, private http: HttpClient,private myserv: ProductService,  public authService: MyAuthService) { 
+    let initParams: InitParams = {
+      appId: '2772668952968600',
+      xfbml: true,
+      version: 'v8.0'
+    };
+ 
+    fb.init(initParams);
+  }
 
   ngOnInit() {
     const defqultuc:  CurrentUser = { 
      _id:'5f27c0f6ad80c631c856597c',
      nom:"user",
      prenom:"user",}
-     this.http.get<any>('http://localhost:5000/api/products').subscribe(data => {
+     this.http.get<any>(ApiUrl.API_URL + '/products').subscribe(data => {
      this.products = data;})
 
      this.myserv.getcategory().subscribe(data => {this.categories = data;
@@ -45,7 +59,8 @@ export class AllProductsComponent implements OnInit {
   
     };
     fullHeight();
-  
+
+    $('#sidebarCollapse').unbind('click');
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
@@ -55,4 +70,23 @@ export class AllProductsComponent implements OnInit {
       this.myserv.getproductsbycategory(id).subscribe(data => {this.probycategories = data;})
     }
 
+    addorder() {
+      if (this.authService.isLoggedIn()) {
+        const myuser = $("#myuser").val();
+        const myproduct = $("#myproduct").val();
+        const myquantity = $("#myquantity").val();
+        this.orderservice.addtocart({
+          user: myuser,
+          product: myproduct,
+          quantity: myquantity,
+         }).subscribe();
+        this.toastr.success("il est au panier :)", 'Merci', {
+          timeOut: 3000,positionClass: 'toast-top-right'
+        });
+       } else{
+        this.toastr.error("Tu dois t'etre Connecter pour que tu puisses mettre ce produit a ton chariot", 'Désolé', {
+          timeOut: 3000,positionClass: 'toast-top-right'
+        });
+       }
+      }
 }

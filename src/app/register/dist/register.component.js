@@ -126,6 +126,12 @@ var RegisterComponent = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    RegisterComponent.prototype.showpassword = function () {
+        this.fieldTextType = !this.fieldTextType;
+    };
+    RegisterComponent.prototype.showcofirmpassword = function () {
+        this.fieldTextType2 = !this.fieldTextType2;
+    };
     RegisterComponent = __decorate([
         core_1.Component({
             selector: 'app-register',

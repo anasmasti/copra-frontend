@@ -5,7 +5,7 @@ import { JumbotronComponent } from './jumbotron.component';
 describe('JumbotronComponent', () => {
   let component: JumbotronComponent;
   let fixture: ComponentFixture<JumbotronComponent>;
-
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ JumbotronComponent ]

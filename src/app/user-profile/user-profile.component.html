@@ -1,9 +1,11 @@
-<app-header></app-header>
 <div class="container  p-4 " style="margin-top: 100px;">
+  <div class="row mb-3">
+    <h3 class="font_bold text-uppercase">tableau de bord</h3>
+  </div>
  <div class="row">
-   <div class="card col-lg-3 border-0 userinfi">
+   <div class="card col-lg-3 col-12  border-0 userinfi">
    <div class="card-body px-2">
-   <img src="https://image.flaticon.com/icons/svg/1161/1161490.svg" class="rounded-circle d-inline" width="20px" height="20px" style="margin-top: -12px;">
+   <img src="https://image.flaticon.com/icons/svg/1161/1161490.svg" class="rounded-circle d-inline mr-2" width="20px" height="20px" style="margin-top: -12px;">
    <h4 class="font_bold text-uppercase d-inline">{{onlineUser.prenom}} {{onlineUser.nom}}</h4> 
    <button data-toggle="modal" data-target="#exampleModalCenter" class="font_bold btn btn-light btn-sm shadow rounded-circle float-right d-inline" ><i class="fas fa-edit"></i></button> 
    <p class="font_normale mt-2" style=" font-size: 14px;"><span class="font_bold">E-mail:</span> {{onlineUser.email}}</p> 
@@ -11,15 +13,16 @@
    <p class=" nbr_font" style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Téléphone:</span>  {{onlineUser.telephone}}</p> 
    </div>
    </div>    
-   <div class="card col-lg-5 border-0 ml-3 mr-3 text-light livraison" >
-   <div class="card-body">
+   <div class="card col-lg-5 col-12  border-0 mx-lg-3 my-3 my-lg-0 text-light livraison" >
+   <div id="liv" class="card-body">
    <h5 class="font_bold d-inline">Adresse de livraison</h5> 
    <button data-toggle="modal" data-target="#exampleModalCenter2" class="font_bold btn btn-light btn-sm shadow rounded-circle float-right d-inline"><i class="fas fa-edit"></i></button> 
-   <p class="font_normale mt-2" style=" font-size: 14px;" ><span class="font_bold">Ville:</span> {{onlineUser.ville}}</p> 
-   <p class="font_normale " style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Adresse:</span> {{onlineUser.addressedelivraison}}</p>  
+   <p class="font_normale mt-2 " style=" font-size: 14px;" ><span class="font_bold">Code Postal:</span> {{onlineUser.codepostal}}</p> 
+   <p class="font_normale" style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Ville:</span> {{onlineUser.ville}}</p> 
+   <p class="font_normale" style="margin-top:-17px; font-size: 14px;" ><span class="font_bold">Adresse:</span> {{onlineUser.addressedelivraison}}</p>  
    </div>
    </div>   
-   <div class="card col-lg-3 border-0 achat">
+   <div class="card col-lg-3 col-12 border-0 achat">
    <div class="card-body">
    <h5 class="font_bold d-inline">Vos achats</h5> 
    <div *ngIf="ordersdetailnotfound" class="mt-1">
@@ -41,7 +44,7 @@
  
 
 <div class="row mt-5">
-   <div class="card col-lg-6 border-0 text-light suivi">
+   <div class="card col-lg-6 col-12 border-0 text-light suivi">
    <div class="card-body">
    <h5 class="font_bold  d-inline">Suivi de livraisons</h5> 
    <button class="font_bold btn btn-danger btn-sm shadow ml-1 float-right d-inline p-1" style="border-radius: 20px; font-size: 10px;pointer-events: none;" >Collecté</button>
@@ -51,8 +54,8 @@
    <div *ngIf="!ordersdetailnotfound">
    <div *ngFor="let or of orderdetail | paginate: { itemsPerPage: 3, currentPage: pa, id: 'pa' }">
    <blockquote class="blockquote mb-0 mt-3">
-     <footer class="blockquote-footer text-light" style="font-size: 9px; margin-bottom: -10px;">{{or.createdAt | date:shortDate }} | {{(or.order.product.name.length>30)?(or.order.product.name | slice:0:30)+'..':(or.order.product.name)}}</footer>
-     <a class="font_bold nbr_font " style="font-size: 12px ; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 175px;"><span  style="color: rgb(211, 210, 210);">ID du colis:</span> {{or._id}}</a>
+     <a (click)="fetchOrderDetail(or._id)" data-toggle="modal" data-target="#exampleModalCenter55" class="blockquote-footer text-light" style="font-size: 11px; margin-bottom: -10px; cursor: pointer;">{{or.createdAt | date:shortDate }} | {{(or.order.product.name.length>30)?(or.order.product.name | slice:0:30)+'..':(or.order.product.name)}}</a>
+     <a (click)="fetchOrderDetail(or._id)" data-toggle="modal" data-target="#exampleModalCenter55" class="font_bold nbr_font " style="font-size: 12px ; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 175px; cursor: pointer;"><span  style="color: rgb(211, 210, 210);">ID du colis:</span> {{or._id}}</a>
    </blockquote>
    <div  class="progress" style="border-radius: 20px; height: 11px;">
      <div *ngIf="or.v" class="progress-bar progress-bar-striped progress-bar-animated bg-danger font_bold" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
@@ -63,14 +66,14 @@
  
    </div>
    </div>    
-   <div class="card col-lg-3 border-0 ml-3 mr-3 coupon">
+   <div class="card col-lg-3 col-12 border-0 mx-lg-3 my-3 my-lg-0 coupon">
    <div class="card-body">
    <h5 class="font_bold d-inline">Vos coupon</h5> 
    <p class="font_bold mt-2 "  style="font-size: 12px ;color: rgb(83, 83, 83);"> Tu as aucun coupon</p>
   
    </div>
    </div>   
-   <div class="card col-lg-2 border-0 deleteaccont">
+   <div class="card col-lg-2 col-12 border-0 deleteaccont">
    <div class="card-body">
    <h6 class="font_bold d-inline">Votre compte</h6> 
    <p class="font_normale mt-2" style="color: rgb(161, 161, 161) !important; font-size: 14px;" >Salut {{onlineUser.prenom}}, sur cette casqe tu peux supprimer ton compte.. </p> 
@@ -94,17 +97,38 @@
           <div class="row">
             <div class="col">
               <label for="prenom" class="font_bold mb-0" style="font-size: 12px;">Prenom :</label>
-              <input type="text" id="prenom" formControlName="prenom" class="form-control rounded-pill" [value]="onlineUser.prenom">
-            </div>
+              <input type="text" [ngClass]="{'is-invalid': prenom.invalid, 'is-valid': !prenom.invalid }" id="prenom" formControlName="prenom" class="form-control rounded-pill" [value]="onlineUser.prenom">
+            
+            <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)"
+            class="alert alert-danger validationerrorstyle">
+        
+          <div *ngIf="prenom.errors.minlength">
+            le prenom doit contenir plus de 2 caractères.
+          </div>
+          </div></div>
             <div class="col">
               <label for="nom" class="font_bold mb-0" style="font-size: 12px;">Nom :</label>
-              <input type="text" id="nom" formControlName="nom" class="form-control rounded-pill"  [value]="onlineUser.nom">
-            </div>
+              <input type="text" [ngClass]="{'is-invalid': nom.invalid, 'is-valid': !nom.invalid }" id="nom" formControlName="nom" class="form-control rounded-pill"  [value]="onlineUser.nom">
+            
+            <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+            class="alert alert-danger validationerrorstyle">
+        
+          <div *ngIf="nom.errors.minlength">
+            le nom doit contenir plus de 2 caractères.
+          </div>
+          </div></div>
           </div>
           <div class="row mt-2">
             <div class="col">
               <label for="email" class="font_bold mb-0" style="font-size: 12px;">E-mail :</label>
-              <input type="text" id="email" formControlName="email" class="form-control rounded-pill"  [value]="onlineUser.email">
+              <input type="text" [ngClass]="{'is-invalid': email.invalid, 'is-valid': !email.invalid }" id="email" formControlName="email" class="form-control rounded-pill"  [value]="onlineUser.email">
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger validationerrorstyle">
+          
+            <div *ngIf="email.errors.email">
+              l'email est invalide.
+            </div>
+            </div>
             </div>
             <div class="col">
               <label for="password" class="font_bold mb-0" style="font-size: 12px;">Mot de passe :</label>
@@ -115,11 +139,24 @@
           <div class="row mt-2">
             <div class="col">
               <label for="sexe" class="font_bold mb-0" style="font-size: 12px;">Sexe :</label>
-              <input type="text" id="sexe" formControlName="sexe" class="form-control rounded-pill"  [value]="onlineUser.sexe">
+              <select class="form-control rounded-pill" [value]="onlineUser.sexe" formControlName="sexe" id="sexe"  >
+                <option [ngValue]="null" disabled>sexe</option>
+                <option value="mal">Mal</option>
+                <option value="femme">Femme</option>
+                <option value="autre">Autre</option>
+              </select>
             </div>
             <div class="col">
               <label for="telephone" class="font_bold mb-0" style="font-size: 12px;">Telephone :</label>
-              <input type="text" id="telephone" formControlName="telephone" class="form-control rounded-pill" [value]="onlineUser.telephone">
+              <input type="text" [ngClass]="{'is-invalid': telephone.invalid, 'is-valid': !telephone.invalid }" id="telephone" formControlName="telephone" class="form-control rounded-pill" [value]="onlineUser.telephone">
+              <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)"
+              class="alert alert-danger validationerrorstyle">
+          
+            <div *ngIf="telephone.errors.pattern">
+              le numéro du téléphone est invalid.
+            </div>
+            </div>
+           
             </div>
           </div>
           <div class="row">
@@ -138,7 +175,7 @@
       </div>
       <div class="modal-footer">
         <button  type="button" class="btn btn-light rounded-pill font_bold shadow" data-dismiss="modal" style="font-size: 14px;" >Fermer</button>
-        <button  type="button" (click)="updateuserinfo()"  data-dismiss="modal" class="btn rounded-pill btncommande font_bold shadow" style="font-size: 14px;" >Modifier mes informations</button>
+        <button  type="button" [ngClass]="{'disabled': userinfoForm.invalid}" (click)="updateuserinfo()"  data-dismiss="modal" class="btn rounded-pill btncommande font_bold shadow" style="font-size: 14px;" >Modifier mes informations</button>
       </div>
     </div>
   </div>
@@ -187,11 +224,23 @@
           <div class="row">
             <div class="col">
               <label for="ville" class="font_bold mb-0" style="font-size: 12px;">Ville :</label>
-              <input type="text" id="ville2" formControlName="ville2" class="form-control rounded-pill" [value]="onlineUser.ville">
+              <select class="form-control rounded-pill" [value]="onlineUser.ville" formControlName="ville2" id="ville2"  >
+                <option [ngValue]="null" disabled>Ville</option>
+                <option value="Marrakech">Marrakech</option>
+                <option value="casa">Casa</option>
+                <option value="rabat">Rabat</option>
+              </select>
+            
             </div>
             <div class="col">
-              <label for="addressedelivraison" class="font_bold mb-0" style="font-size: 12px;">Adresse de livraison :</label>
-              <input type="text" id="addressedelivraison2" formControlName="addressedelivraison2" class="form-control rounded-pill"  [value]="onlineUser.addressedelivraison">
+              <label for="codepostal2" class="font_bold mb-0" style="font-size: 12px;">Code Postal :</label>
+              <input type="text" id="codepostal2" formControlName="codepostal2" class="form-control rounded-pill"  [value]="onlineUser.codepostal">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="addressedelivraison2" class="font_bold mb-0" style="font-size: 12px;">Addresse de livraison :</label>
+              <textarea id="addressedelivraison2"  formControlName="addressedelivraison2" class="form-control rounded-pill"  [value]="onlineUser.addressedelivraison"></textarea>
             </div>
           </div>
         </form>
@@ -208,7 +257,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content border-light" style="border-radius: 19px;">
       <div class="modal-header">
-        <h2 class="modal-title font_bold" id="exampleModalCenterTitle">Modification de mot de passe</h2>
+        <h3 class="modal-title font_bold" id="exampleModalCenterTitle">Modification de mot de passe</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -218,14 +267,80 @@
           <div class="row">
             <div class="col">
               <label for="password" class="font_bold mb-0" style="font-size: 12px;">Entrer le nouveau mot de passe :</label>
-              <input type="text" id="password"  formControlName="password" class="form-control rounded-pill">
-            </div>
+              <div class="input-group">
+              <input [ngClass]="{'is-invalid': password.invalid, 'is-valid': !password.invalid}" style="border-top-left-radius: 36px; border-bottom-left-radius: 36px;" [type]="fieldTextType ? 'text' : 'password'" id="password"  formControlName="password" class="form-control">
+           
+              <span class="input-group-text bg-transparent" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 36px; border-bottom-right-radius: 32px;">
+                <i class="fa fa-eye-slash" [ngClass]="{
+                  'fa-eye-slash': !fieldTextType,
+                  'fa-eye': fieldTextType
+                }"
+                (click)="showpassword()"></i>
+              </span></div>
+            </div> </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="alert alert-danger validationerrorstyle">
+        
+          <div *ngIf="password.errors.required">
+            mot de passe obligatoire.
           </div>
+          <div *ngIf="password.errors.minlength">
+            le mot de passe doit contenir plus de 6 caractères.
+          </div>
+          </div>
+         
+          <div class="row">
+            <div class="col">
+              <label for="confirmpassword" class="font_bold mb-0" style="font-size: 12px;">Conformer le nouveau mot de passe :</label>
+          <div class="input-group">     
+            <input type="text" id="confirmpassword" style="border-top-left-radius: 36px; border-bottom-left-radius: 36px;" [ngClass]="{'is-invalid': confirmpassword.invalid, 'is-valid': !confirmpassword.invalid }" [type]="fieldTextType2 ? 'text' : 'password'"  formControlName="confirmpassword" class="form-control ">
+              <span class="input-group-text bg-transparent" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 36px; border-bottom-right-radius: 32px;">
+                <i class="fa fa-eye-slash" [ngClass]="{
+                  'fa-eye-slash': !fieldTextType2,
+                  'fa-eye': fieldTextType2
+                }"
+                (click)="showcofirmpassword()"></i>
+              </span>
+            </div> </div> </div>
+            <div *ngIf="confirmpassword.invalid && (confirmpassword.dirty || confirmpassword.touched)"
+            class="alert alert-danger validationerrorstyle">
+        
+          <div *ngIf="confirmpassword.errors.required">
+            la confirmation du mot de passe est obligatoire.
+          </div>
+          <div *ngIf="confirmpassword.errors.notSame">
+            mot de passe non concordant.
+          </div>
+          </div>
+        
         </form>
       </div>
       <div class="modal-footer">
         <button  type="button" class="btn btn-light rounded-pill  font_bold shadow" style="font-size: 14px;" data-dismiss="modal">Fermer</button>
-        <button  type="button" (click)="updatepassword()"  data-dismiss="modal" class="btn rounded-pill shadow btncommande font_bold" style="font-size: 14px;" >Modifier</button>
+        <button  type="button" [ngClass]="{'disabled': userpasswordForm.invalid}" (click)="updatepassword()"  data-dismiss="modal" class="btn rounded-pill shadow btncommande font_bold" style="font-size: 14px;" >Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter55" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-light" style="border-radius: 19px;">
+      <div class="modal-header">
+        <h4 class="modal-title font_bold" id="exampleModalCenterTitle"><i class="fas fa-box-open"></i> ID du colis: <span class="nbr_font" style="color: #8d52ff;">{{fetchorderdetail?._id}}</span></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p>Produit: <span class="font_bold">{{fetchorderdetail?.order?.product?.name}}</span></p>
+      <p>Quantité: <span class="font_bold nbr_font " style="color: #8d52ff;">{{fetchorderdetail?.order?.quantity}}</span></p>
+      <p>Date d'Achat: <span class="font_bold nbr_font" style="color: #8d52ff;">{{fetchorderdetail?.createdAt | date:shortDate}}</span></p>
+       
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-light rounded-pill  font_bold shadow" style="font-size: 14px;" data-dismiss="modal">Fermer</button>
+       
       </div>
     </div>
   </div>

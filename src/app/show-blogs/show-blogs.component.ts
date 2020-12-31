@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { TwitterService } from 'ngx-twitter-api';
+import { ApiUrl } from '../models/api-url.model';
 @Component({
   selector: 'app-show-blogs',
   templateUrl: './show-blogs.component.html',
@@ -15,7 +16,7 @@ export class ShowBlogsComponent implements OnInit {
 
   ngOnInit() {
     const id = this.actRoute.snapshot.paramMap.get('id');
-    this.http.get<any>( 'http://localhost:5000/api/blog/'+id).subscribe(data => {
+    this.http.get<any>( ApiUrl.API_URL +"/blog/"+id).subscribe(data => {
     this.blog = data;})
     this.getHomeTimeline()
   }

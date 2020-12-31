@@ -38,6 +38,9 @@ var LoginComponent = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    LoginComponent.prototype.showpassword = function () {
+        this.fieldTextType = !this.fieldTextType;
+    };
     LoginComponent = __decorate([
         core_1.Component({
             selector: 'app-login',

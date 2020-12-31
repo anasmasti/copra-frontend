@@ -12,7 +12,7 @@ export class CopraFoodComponent implements OnInit {
   probycoprafood: any;
   isLoggedIn: any;
   currentuser: CurrentUser;
-
+  p;
   constructor(private myserv: ProductService, private myauthService: MyAuthService) { }
 
   ngOnInit() {  

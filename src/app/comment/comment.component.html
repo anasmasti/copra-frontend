@@ -14,7 +14,7 @@
 <form class="review-form mt-4">
   <form [formGroup]="commentForm" class="display-flex" (ngSubmit)="addcomment()">
     <div class="form-group">
-        <textarea class="form-control " style="border-radius: 30px; box-shadow: -1px 6px 7px 0px #0000000d;" formControlName="comment" rows="10"></textarea>
+        <textarea class="form-control p-4" placeholder="Écris.." style="border-radius: 30px; box-shadow: -1px 6px 7px 0px #0000000d;" formControlName="comment" rows="10"></textarea>
     </div>
     <input formControlName="user" type="hidden" required >
     <input formControlName="product" type="hidden" required>

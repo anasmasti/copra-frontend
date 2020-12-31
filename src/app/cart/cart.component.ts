@@ -1,15 +1,12 @@
-import { Product } from './../models/product.model';
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
-import { CartService } from '../services/cart.service';
 import { OrderService } from '../services/order.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MyAuthService } from '../services/auth.service';
 import { IPayPalConfig,ICreateOrderRequest } from 'ngx-paypal';
-import { async } from '@angular/core/testing';
+import { ApiUrl } from '../models/api-url.model';
 
 
 @Component({
@@ -29,7 +26,15 @@ export class CartComponent implements OnInit {
     quantity: new FormControl(),
     totalprice: new FormControl(),
     adresse: new FormControl(),
-  })
+  });
+  editquantityForm = new FormGroup({
+    userforedit: new FormControl(),
+    productforedit: new FormControl(),
+    quantityforedit: new FormControl(null,[
+      Validators.min(1),
+      Validators.max(9)])
+  });
+  fetchdata: any;
   ordersdetail: any;
   quan = {};
   prod = {};
@@ -37,14 +42,15 @@ export class CartComponent implements OnInit {
   currentuser: any;
   tot;
   ordersnotfound: boolean = false;
+  p;
   constructor(public authService: MyAuthService, public router: Router, private actRoute: ActivatedRoute, private http: HttpClient, private toastr: ToastrService,private activatedRoute: ActivatedRoute,
-    private productService: ProductService, 	private cartservice: CartService, private orderservice: OrderService) { }
+    private orderservice: OrderService) { }
 
 
   ngOnInit() {
     const userid = this.actRoute.snapshot.paramMap.get('userid');
     this.orderservice.getorder(userid).subscribe( data => {
-    this.orders = data;  
+    this.orders = data;
     if(this.orders == null || this.orders.length == 0){
       this.ordersnotfound = true
     }
@@ -54,13 +60,13 @@ export class CartComponent implements OnInit {
 
     this.orderservice.getcountorder(userid).subscribe( data => {
     this.countoforders = data });
-    
+
     if (this.authService.isLoggedIn()) {
-      this.isLoggedIn = true  
+      this.isLoggedIn = true
       this.currentuser = JSON.parse(localStorage.getItem('currentUser'))
-     } 
+     }
      if(!this.isLoggedIn) { this.isLoggedIn = false; this.currentuser = this.authService.getCurrentUser()}
-    
+
      this.initConfig();
 
   }
@@ -71,17 +77,17 @@ export class CartComponent implements OnInit {
     let myquan: any=[];
     const userid = this.actRoute.snapshot.paramMap.get('userid');
     this.orderservice.getorder(userid).subscribe( data => {
-    this.ordersdetail = data;   
+    this.ordersdetail = data;
     for (let i = 0; i < this.ordersdetail.length; i++) {
        this.quan[i] = $(`#quan${i}`).val();
        this.prod[i] = $(`#prod${i}`).val();
        myprod.push(this.prod[i])
-       myquan.push(this.quan[i])}  
+       myquan.push(this.quan[i])}
     this.orderdetailForm.get('user').setValue(userid);
     this.orderdetailForm.get('totalprice').setValue(tot);
     this.orderdetailForm.get('adresse').setValue(adr);
     for (let x = 0; x < this.ordersdetail.length; x++) {
-     this.http.post('http://localhost:5000/api/orderdetail/',   
+     this.http.post(ApiUrl.API_URL+"/orderdetail/",
     {order: {product : myprod[x] ,quantity : myquan[x]},
     user : this.orderdetailForm.get('user').value,
     totalprice: this.orderdetailForm.get('totalprice').value,
@@ -94,10 +100,10 @@ export class CartComponent implements OnInit {
 
 private initConfig(): void { let totforpp: any;
   function gettotaleprice(callback){
-      setTimeout ( () => { totforpp = $('#tot').val() ;
-  callback();
-}, 1100);
-  } 
+   setTimeout ( () => { totforpp = $('#tot').val() ;
+   callback();
+  }, 1100);
+  }
   gettotaleprice(()=>{
     this.payPalConfig = {
         currency: 'USD',
@@ -128,16 +134,16 @@ private initConfig(): void { let totforpp: any;
         },
         onClientAuthorization: (data) => {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            
+
         },
         onCancel: (data, actions) => {
             console.log('OnCancel', data, actions);
-           
+
 
         },
         onError: err => {
             console.log('OnError', err);
-           
+
         },
 }
 
@@ -148,7 +154,7 @@ deleteorder(id:any){
   this.orderservice.deletefromorders(id).subscribe((data) => {
     const userid = this.actRoute.snapshot.paramMap.get('userid');
     this.orderservice.getorder(userid).subscribe( data => {
-    this.orders = data;  
+    this.orders = data;
     if(this.orders == null || this.orders.length == 0){
       this.ordersnotfound = true
     }
@@ -160,8 +166,27 @@ deleteorder(id:any){
   });
 }
 
+fetchOrder(orderid){
+this.orderservice.fetchorder(orderid).subscribe(data=>{
+this.fetchdata = data
+})
 }
 
-  
-  
+editQuantity(orderid){
+  const userforedit = $("#userforedit").val();
+  const productforedit = $("#productforedit").val();
+  const orderquantity = $("#quantityforedit").val();
+  this.orderservice.updateorder(orderid,{ quantity: orderquantity, user: userforedit, product: productforedit })
+  .subscribe(()=>{
+    this.orderservice.getorder(userforedit).subscribe( data => {
+     this.orders = data;   })
+  })
+}
+
+get quantityforedit() { return this.editquantityForm.get('quantityforedit'); }
+
+}
+
+
+
 

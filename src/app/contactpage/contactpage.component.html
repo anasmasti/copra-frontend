@@ -1,37 +1,70 @@
-<app-header></app-header>
-
-<div class="container col-lg-12 col-sm-12  mt-5 mb-sm-5  ">
-<div class="card border-light px-5 m-5 mt-5 mx-5" style="border-radius: 37px;">
+<div class="container col-lg-12 col-12  mt-5 mb-sm-5  ">
+<div class="card border-light px-lg-5 m-lg-5 mt-5 mx-lg-5" style="border-radius: 37px;">
   <div class="card-body">
        <div class="row p-lg-3">
 	<div class="col-lg-6 col-sm-12" >
 		<h1 class="font_bold mt-5">Contactez-nous</h1>
 		<h2 class="font_light" style="font-size: 20px;">Nous sommes là pour vous aider.</h2>
-		<form action="" class="mt-5">
-      <div class="form-row form-group">
-          <div class="col">
-            <input type="text" class="form-control rounded-pill  " placeholder="Nom" required>
-         
-          </div>
-          <div class="col">
-            <input type="text" class="form-control rounded-pill " placeholder="Prenom" required>
-          </div>
+		<form [formGroup]="contactForm" (ngSubmit)="contactUs()" class="mt-5">
+    <div class="form-group">
+        <input type="text" [ngClass]="{'is-invalid': nom.invalid && nom.touched, 'is-valid': !nom.invalid }" formControlName="nom" class="form-control rounded-pill" placeholder="Nom Complet" required>
+        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+        class="alert alert-danger validationerrorstyle">
+        <div *ngIf="nom.errors.required">
+          Nom obligatoire.
         </div>
-			<div class="form-group ">
-          <input type="email" class="form-control rounded-pill  " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="l'Adresse e-mail" required>             </div>
-        <div class="form-group ">
-          <input type="text" class="form-control rounded-pill "  placeholder="Numero de telephone" required>           
+        <div *ngIf="nom.errors.minlength">
+          Nom invalid.
         </div>
-        <div class="form-group ">
-          <textarea type="text" class="form-control rounded-pill "  placeholder="Message" required></textarea>
         </div>
+      </div>
+		<div class="form-group ">
+        <input type="email" [ngClass]="{'is-invalid': email.invalid && email.touched, 'is-valid': !email.invalid }" formControlName="email" class="form-control rounded-pill"  placeholder="l'Adresse e-mail" required>             
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="alert alert-danger validationerrorstyle">
+        <div *ngIf="email.errors.required">
+          L'email obligatoire.
+        </div>
+        <div *ngIf="email.errors.email">
+          L'email doit être validé.
+        </div>
+        </div>
+      </div>
+     <div class="form-group ">
+        <input type="text" [ngClass]="{'is-invalid': phone.invalid && phone.touched, 'is-valid': !phone.invalid }" formControlName="phone" class="form-control rounded-pill"  placeholder="Numero de telephone" required>           
+        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+        class="alert alert-danger validationerrorstyle">
+        <div *ngIf="phone.errors.required">
+          Téléphone obligatoire.
+        </div>
+        <div *ngIf="phone.errors.pattern">
+          Téléphone invalide.
+       </div>
+       </div>
+      </div>
+     <div class="form-group ">
+        <textarea type="text" formControlName="message" [ngClass]="{'is-invalid': message.invalid && message.touched, 'is-valid': !message.invalid }" class="form-control rounded-pill"  placeholder="Message" required></textarea>
+        <div *ngIf="message.invalid && (message.dirty || message.touched)"
+        class="alert alert-danger validationerrorstyle">
+        <div *ngIf="message.errors.required">
+          Saisir votre Message.
+        </div>
+        <div *ngIf="message.errors.minlength">
+          Ton message doit contenir au moins une phrase
+       </div>
+       <div *ngIf="message.errors.maxlength">
+          Votre message ne doit pas dépasser 400 caractères.
+     </div>
+       </div>
+    
+      </div>
 
-			<button class="btn rounded-pill btncommande shadow mt-lg-2 ">Envoyer</button>
+			<button type="submit" class="btn btn-sm font_bold rounded-pill btncommande shadow mt-lg-2 ">Envoyer</button>
         </form>
     </div>   
 
-     <div class="col-lg-6 col-sm-12 mt-sm-5">
-        <div class="mapouter "><div class="gmap_canvas"><iframe width="500" height="800" id="gmap_canvas" src="https://maps.google.com/maps?q=hay%20hassani&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{position:relative;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
+    <div class="col-lg-6 col-12 mt-5">
+    <div class="mapouter"><div class="gmap_canvas"><iframe class="copra-map" id="gmap_canvas" src="https://maps.google.com/maps?q=hay%20hassani&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{position:relative;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
 	</div>
 </div>
   </div>

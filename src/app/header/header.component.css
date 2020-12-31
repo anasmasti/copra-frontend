@@ -22,4 +22,25 @@
 .round{
     border-radius: 25px;
 }
+.logo{
+    width:143px;
+    height:35px;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px){
+ 
+    .nav-item{width:100%;text-align:center;}
 
+}
+@media only screen and (min-width: 480px) and (max-width: 768px){
+    .navbar .collapse {max-height:250px;width:100%;overflow-y:auto;overflow-x:hidden;}
+    .navbar .navbar-brand {float:none;display: inline-block;}
+    .navbar .navbar-nav>.nav-item { float: none; margin-left: .1rem;}
+    .navbar .navbar-nav {float:none !important;}
+    .nav-item{width:100%;text-align:left;}
+    .navbar .collapse .dropdown-menu {
+      position: relative;
+      float: none;
+      background:none;
+      border:none;
+    }
+}

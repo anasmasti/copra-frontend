@@ -8,7 +8,7 @@ import { MyAuthService } from '../services/auth.service';
   styleUrls: ['./thankyou.component.css']
 })
 export class ThankyouComponent implements OnInit {
-  onlineUser: Object = {};
+  onlineUser: any;
   constructor(public sauthService: MyAuthService,
     private activatedRoute: ActivatedRoute) { }
 

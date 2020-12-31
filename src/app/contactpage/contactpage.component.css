@@ -1,0 +1,18 @@
+.copra-map{
+    width: 500px;
+    height: 450px;
+    border-radius: 30px;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    .copra-map{
+        width: 350px;
+        height: 500px;
+    }
+    }
+@media only screen and (min-width: 480px) and (max-width: 768px){
+    .copra-map{
+        width: 350px;
+        height: 500px;
+    }
+}
+  

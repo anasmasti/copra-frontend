@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 dologout(){
   this.authService.logout();
+  window.location.reload();
   this.router.navigate(['login']);
 }
 

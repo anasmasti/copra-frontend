@@ -12,7 +12,7 @@ export class CopraPromoComponent implements OnInit {
   probycoprapromo: any;
   isLoggedIn: boolean;
   currentuser: any;
-
+  p;
   constructor(private myserv: ProductService, private myauthService: MyAuthService) { }
 
   ngOnInit() {

@@ -223,30 +223,7 @@ img {
    outline: none;
    box-shadow: none;
  }
- .product-count {
-   margin-top: 15px; 
- }
- .product-count .qtyminus,
- .product-count .qtyplus {
-   width: 34px;
-     height: 34px;
-     background: #212529;
-     text-align: center;
-     font-size: 19px;
-     line-height: 36px;
-     color: #fff;
-     cursor: pointer;
- }
- .product-count .qtyminus {
-   border-radius: 3px 0 0 3px; 
- }
- .product-count .qtyplus {
-   border-radius: 0 3px 3px 0; 
- }
- .product-count .qty {
-   width: 60px;
-   text-align: center;
- }
+
  .round-black-btn {
    border-radius: 4px;
      background: #212529;
@@ -327,3 +304,13 @@ img {
 color:rgb(39, 39, 39);
 text-decoration: none;
 }
+@media only screen and (min-width: 320px) and (max-width: 480px){
+  .size_for_mobile{font-size: 10px !important;}
+  .prod_w_for_mobile {
+    width: 410px; }
+   }
+@media only screen and (min-width: 480px) and (max-width: 768px){
+  .size_for_mobile{font-size: 10px !important;}
+  .prod_w_for_mobile {
+    width: 410px; }
+ }

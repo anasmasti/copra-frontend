@@ -40,21 +40,22 @@ display: block;
 color: rgb(46, 46, 46);
 border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 #sidebar ul li a span {
-  color: #def657; }
+color: #def657; }
 #sidebar ul li a:hover {
-    font-weight: 700;
-    text-decoration: none; }
+color: #def657;
+text-decoration: none;
+cursor: pointer; }
 #sidebar ul li.active > a {
-  background: transparent;
-  color: rgb(49, 49, 49); }
-  #sidebarCollapse  {
-      z-index: 2;
-  color: black; } 
+background: transparent;
+color: rgb(49, 49, 49); }
+#sidebarCollapse  {
+z-index: 2;
+color: black; } 
 @media (max-width: 991.98px) {
 #sidebar {
- margin-left: -270px; }
- #sidebar.active {
-   margin-left: 0; } }
+margin-left: -270px; }
+#sidebar.active {
+margin-left: 0; } }
 #sidebar .custom-menu {
  display: inline-block;
  position: absolute;
@@ -108,7 +109,7 @@ height: auto;
 transition: all 0.3s; }
 
 #clockdiv {
-  background-color: #5700a5;
+  background-color: #8f12ff;
   display: inline-block;
   text-align: center;
   font-size: 20px;
@@ -166,4 +167,11 @@ height: auto;
   border-radius: 7px;
   margin: 0 5px;
   cursor: pointer;
+}
+.bg_forprod{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.748), rgba(0, 0, 0, 0)) ,url("https://images.unsplash.com/photo-1577538928305-3807c3993047?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"); 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  height: auto;
 }

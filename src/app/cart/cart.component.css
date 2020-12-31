@@ -6,6 +6,9 @@
     color: rgb(24, 24, 24);
     font-weight: 700;
 }
+.borderless td, .borderless th {
+    border: none;
+}
 
 .btn_insta{
     background-image: url('../img/btncouleur_insta.jpg');

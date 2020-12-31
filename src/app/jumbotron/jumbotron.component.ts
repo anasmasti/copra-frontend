@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MyAuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { CurrentUser } from '../models/user.model';
+import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-jumbotron',
   templateUrl: './jumbotron.component.html',
@@ -11,11 +12,12 @@ export class JumbotronComponent implements OnInit {
   currentuser;
   productsearch;
   search = "";
-  isempty = true;
+  isempty = false;
   values: string;
- 
+  p;
+  p2;
   
-  constructor(private http: HttpClient, private myauthService: MyAuthService, public authService: MyAuthService) { }
+  constructor(private http: HttpClient, private myauthService: MyAuthService, private prodserv: ProductService) { }
   contentLoaded = false;
   isLoggedIn = false;
   slideConfig = {
@@ -25,7 +27,7 @@ export class JumbotronComponent implements OnInit {
     "dots": false,
     "autoplay": true,
     "arrows" : false,
-    "autoplaySpeed": 2000,};
+    "autoplaySpeed": 4000,};
     slideConfig2 = {
       "slidesToShow": 7,
       "slidesToScroll": 1,
@@ -42,8 +44,8 @@ export class JumbotronComponent implements OnInit {
     setTimeout(() => {
       this.contentLoaded = true;
     }, 1000);
-    if (this.search != "") {this.isempty = false;}
-    this.http.get<any>('http://localhost:5000/api/products').subscribe(data => {
+    if (this.search === "") {this.isempty = true;}
+    this.prodserv.getproducts().subscribe(data => {
       this.productsearch = data
     })
 

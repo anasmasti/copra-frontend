@@ -5,41 +5,42 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { ToastrService } from 'ngx-toastr';
+import { ApiUrl } from '../models/api-url.model';
+import { async } from '@angular/core/testing';
 @Injectable({
   providedIn: 'root'
 })
 export class MyAuthService {
-  API_URL: string = 'http://localhost:5000/api';
+
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
+  msgerr: any;
   constructor(private toastr: ToastrService,private httpClient: HttpClient,public router: Router) {
-
     this.currentUserSubject = new BehaviorSubject(localStorage.getItem('currentUser')|| '');
     this.currentUser = this.currentUserSubject.asObservable();
    }
- 
 
 register(user: User): Observable<any> {
-  return this.httpClient.post(`${this.API_URL}/users/register`, user).pipe(
-      catchError(this.handleError)
-  )
-}
+  return this.httpClient.post(ApiUrl.API_URL + "/users/register", user)}
 
 login(user: User) {
-  return this.httpClient.post<any>(`${this.API_URL}/users/login`, user)
+  return new Promise((resolve, reject) => {
+   this.httpClient.post<any>(ApiUrl.API_URL + "/users/login", user)
     .subscribe((data: any) => {
       localStorage.setItem('access_token', data.token)
       localStorage.setItem('currentUser', JSON.stringify( data.user))
       this.currentUserSubject.next(data.user);
-      this.getUserProfile(data.user._id).subscribe((res) => {
-        this.router.navigate(['/profile/' + res._id]);
-        this.toastr.success('Tu peux maintenant acheté', 'Bienvenue', {
+      this.getUserProfile(data.user._id).subscribe(async (res) => {
+      await  this.router.navigate(['/profile/' + res._id]).then(() => {
+      window.location.reload();});
+      this.toastr.success('Tu peux maintenant acheté', 'Bienvenue', {
           positionClass: 'toast-top-left',
         });
       })
-    })
+    }, (error) =>  {this.msgerr = error.error, resolve(this.msgerr)}
+    )})
 }
 
 getCurrentUser(): any {
@@ -64,31 +65,21 @@ logout() {
   }
 }
 
-getUserProfile(id): Observable<any> {
-  return this.httpClient.get(`${this.API_URL}/users/`+id, { headers: this.headers }).pipe(
+getUserProfile(id: any): Observable<any> {
+  return this.httpClient.get(ApiUrl.API_URL + "/users/"+id, { headers: this.headers }).pipe(
     map((res: Response) => {
       return res || {}
-    }),
-    catchError(this.handleError)
+    })
   )
 }
 updateUserProfile(id, data): Observable<any> {
-  return this.httpClient.put(`${this.API_URL}/users/`+id,data)}
+  return this.httpClient.put(ApiUrl.API_URL + "/users/"+id,data)}
 
 updateUserPassword(id, data): Observable<any> {
-  return this.httpClient.put(`${this.API_URL}/users/password/`+id,data)}
+  return this.httpClient.put(ApiUrl.API_URL + "/users/password/"+id,data)}
 
-handleError(error: HttpErrorResponse) {
-  let msg = '';
-  if (error.error instanceof ErrorEvent) {
-    // client-side error
-    msg = error.error.message;
-  } else {
-    // server-side error
-    msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-  }
-  return throwError(msg);
-}
+sendemailforresetpassword(user: User): Observable<any>{
+return this.httpClient.post(ApiUrl.API_URL + "/users/resetpssword",user)}
 
 }
 

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ApiUrl } from '../models/api-url.model';
 
 @Component({
   selector: 'app-comment',
@@ -21,11 +22,13 @@ export class CommentComponent implements OnInit {
   })
   commentsend: any;
   commentnotfound: boolean;
+  p;
+  shortDate;
   constructor(private toastr: ToastrService,private actRoute: ActivatedRoute,private http: HttpClient,public authService: MyAuthService) { }
 
   ngOnInit() {
     const id = this.actRoute.snapshot.paramMap.get('id');
-    this.http.get<any>('http://localhost:5000/api/comment/'+id).subscribe(data => {
+    this.http.get<any>(ApiUrl.API_URL+ "/comment/"+id).subscribe(data => {
       this.comments = data;
       this.commentnotfound = false
       if(this.comments == null || this.comments == 0 || this.comments.length == 0){
@@ -45,7 +48,7 @@ export class CommentComponent implements OnInit {
     this.commentForm.get('user').setValue(userid);
     this.commentsend = this.commentForm.value;
     if (this.authService.isLoggedIn()) {
-    this.http.post('http://localhost:5000/api/comment/', this.commentsend).subscribe(() => {
+    this.http.post(ApiUrl.API_URL+"/comment/", this.commentsend).subscribe(() => {
       window.location.reload();
     })
     this.commentForm.reset();}else{

@@ -1,53 +1,74 @@
-<div class="container ">
-    <h1 class="h3 font_bold">Recommandations<span style="color: rgb(146, 146, 146);">(Nouveauté)</span>  </h1>
+<div class="container col-sm-12 ">
+    <h1 id="nv" class="h3 font_bold ml-lg-5">Recommandations <span style="color: rgb(146, 146, 146);">(Nouveauté)</span>  </h1>
     <div class="row ">
-     
-      <ngx-slick class="carousel col-lg-12" [config]="slideConfig">
+      <ngx-slick class="carousel col-lg-11 ml-5 hide_in_mobile" [config]="slideConfig">
         <div ngxSlickItem  *ngFor="let product of products" class="slide">
             <div class="product-grid mb-3">
                 <div class="product-image" >
-                    <a style="cursor: pointer;" [routerLink]="['/products',product._id]" >
+                    <a style="cursor: pointer;" [routerLink]="['/products',product._id,currentuser._id ]" >
                         <img class="pic-1" src="{{ product.img_1}}" >
                         <img class="pic-2" src="{{ product.img_3}}">
                     </a>
                     <ul class="social" >
-                        <li><a href=""  data-tip="Aperçu rapide"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" [class.disabled] = "product.quantity < 1"  data-tip="Mettre dans cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a [routerLink]="['/products',product._id,currentuser._id ]" data-tip="Aperçu rapide"><i class="fa fa-search"></i></a></li>
+                        <li> <input type="hidden" [value]="currentuser._id" id="myuser">
+                            <input type="hidden" [value]="product._id" id="myproduct">
+                            <input type="hidden" [value]="1" id="myquantity">
+                            <a (click)="addorder()" style="cursor: pointer;" [class.disabled] = "product.quantity < 1" data-tip="Mettre à ma cart"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                     <span class="product-new-label font_bold">EN STOCK</span>
                     <span class="product-discount-label nbr_font font_bold" style="font-size: 13px;">-20%</span>
                 </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star disable"></li>
-                </ul>
+           
                 <div class="product-content">
-                    <h3 class="title"><a style="cursor: pointer;"   [routerLink]="['/products',product._id,currentuser._id ]" >{{ product.name }}</a></h3>
+                    <h3 class="title"><a style="cursor: pointer;" [routerLink]="['/products',product._id,currentuser._id ]" >{{ product.name }}</a></h3>
                     <div class="price">{{ product.price | currency : 'MAD'}}
                         <span>{{ product.price_off | currency : 'MAD'}}</span>
                     </div>
                     <!-- <a class="add-to-cart" href="">+ Ajouter au panier</a> -->
                 </div>
-           
             </div>
         </div>
- 
       </ngx-slick>
 
-
+      <ngx-slick class="carousel hide_in_dt ml-3 fix-slid-mobile" [config]="slideConfig2" >
+        <div ngxSlickItem  *ngFor="let product of products" class="slide" >
+            <div class="product-grid mb-3">
+                <div class="product-image" >
+                    <a style="cursor: pointer;" [routerLink]="['/products',product._id,currentuser._id ]" >
+                        <img class="pic-1" src="{{ product.img_1}}" >
+                        <img class="pic-2" src="{{ product.img_3}}">
+                    </a>
+                    <ul class="social" >
+                        <li><a [routerLink]="['/products',product._id,currentuser._id ]" data-tip="Aperçu rapide"><i class="fa fa-search"></i></a></li>
+                        <li> <input type="hidden" [value]="currentuser._id" id="myuser">
+                            <input type="hidden" [value]="product._id" id="myproduct">
+                            <input type="hidden" [value]="1" id="myquantity">
+                            <a (click)="addorder()" style="cursor: pointer;" [class.disabled] = "product.quantity < 1" data-tip="Mettre à ma cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                    <span class="product-new-label font_bold">EN STOCK</span>
+                    <span class="product-discount-label nbr_font font_bold" style="font-size: 13px;">-20%</span>
+                </div>
+          
+                <div class="product-content">
+                    <h3 class="title"><a style="cursor: pointer;" [routerLink]="['/products',product._id,currentuser._id ]" >{{ product.name }}</a></h3>
+                    <div class="price">{{ product.price | currency : 'MAD'}}
+                        <span>{{ product.price_off | currency : 'MAD'}}</span>
+                    </div>
+                    <!-- <a class="add-to-cart" href="">+ Ajouter au panier</a> -->
+                </div>
+            </div>
+        </div>
+      </ngx-slick>
     </div>
-    <h1 class="h3 font_bold " style="margin-top: 150px;">ACHETER <span style="color: rgb(146, 146, 146);">(Par Catégorie)</span> </h1>
 
-
-    <div class="container">
+    <h1 class="h3 font_bold mt-5 ml-lg-5 " >Acheter <span style="color: rgb(146, 146, 146);"> (Par Catégorie)</span> </h1>
+    <div class="container ">
       <div class="grid">
           <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-2 hide_in_mobile">
                   <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/838875/pexels-photo-838875.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" height="280px" alt="electro" />
+                      <img class="imgbycat" src="https://images.pexels.com/photos/838875/pexels-photo-838875.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" height="280px" alt="electro" />
                       <figcaption>
                           <h2><span>BAUTÉ</span></h2>
                           <p>
@@ -58,31 +79,29 @@
               </div>
               <div class="col-md-4">
                   <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" height="280px" alt="img25" />
+                      <img class="imgbycat" src="https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" height="280px" alt="img25" />
                       <figcaption>
-                          <h2><span>Nouveauté</span></h2>
+                          <h2><span>COPRA#Promo</span></h2>
                           <p>
                               <a href="#"><i class="fa fa-search"></i></a>
-
                           </p>
                       </figcaption>
                   </figure>
               </div>
               <div class="col-md-4">
                 <figure class="effect-ravi">
-                    <img src="https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" height="280px" alt="maison" />
+                    <img class="imgbycat" src="https://images.unsplash.com/photo-1553881651-43348b2ca74e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" height="280px" alt="maison" />
                     <figcaption>
                         <h2><span>Maison</span></h2>
                         <p>
                             <a href="#"><i class="fa fa-search"></i></a>
-
                         </p>
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 hide_in_mobile">
               <figure class="effect-ravi">
-                  <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" height="280px" alt="mode" />
+                  <img class="imgbycat" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=662&q=80" height="280px" alt="mode" />
                   <figcaption>
                       <h2><span>MODE</span></h2>
                       <p>
@@ -92,53 +111,11 @@
               </figure>
           </div>
           </div>
-          <div class="row">
-              <div class="col">
-                  <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/2292953/pexels-photo-2292953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" height="450px" alt="img25" />
-                      <figcaption>
-                          <h2><span>Promos</span></h2>
-                          <p>
-                              <a href="#"><i class="fa fa-search"></i></a>
-
-                          </p>
-                      </figcaption>
-                  </figure>
-              </div>
-              <div class="col">
-                  <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/2533266/pexels-photo-2533266.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" height="450px" alt="img25" />
-                      <figcaption>
-                          <h2><span>Recommendations</span></h2>
-                          <p>
-                              <a href="#"><i class="fa fa-search"></i></a>
-
-                          </p>
-                      </figcaption>
-                  </figure>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/1161547/pexels-photo-1161547.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" height="450px" width="100%"  alt="img25" />
-                      <figcaption>
-                          <h2><span>COPRA#original</span></h2>
-                          <p>
-                              <a href="#"><i class="fa fa-search"></i></a>
-
-                          </p>
-                      </figcaption>
-                  </figure>
-
-              </div>
-          </div>
-
 
           <div class="row">
               <div class="col-md-4">
                   <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/373076/pexels-photo-373076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="550px" height="250px" alt="img17" />
+                      <img class="imgbycat" src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80" width="550px" height="250px" alt="img17" />
                       <figcaption>
                           <h2><span>ELECTRONIC</span></h2>
                           <p>
@@ -149,33 +126,118 @@
               </div>
               <div class="col-md-4">
                   <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="550px" height="250px" alt="img25" />
+                      <img class="imgbycat" src="https://images.unsplash.com/photo-1564933983533-2c8152d3d00e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" width="550px" height="250px" alt="img25" />
                       <figcaption>
                           <h2><span>TENDANCE</span></h2>
                           <p>
                               <a href="#"><i class="fa fa-search"></i></a>
-
                           </p>
                       </figcaption>
                   </figure>
               </div>
               <div class="col-md-4">
                   <figure class="effect-ravi">
-                      <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" width="550px" height="250px" alt="img25" />
+                      <img class="imgbycat" src="https://images.unsplash.com/photo-1550949875-181c4577566b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" width="550px" height="250px" alt="img25" />
                       <figcaption>
                           <h2><span>COPRA#food</span></h2>
                           <p>
                               <a href="#"><i class="fa fa-search"></i></a>
-
                           </p>
                       </figcaption>
                   </figure>
               </div>
           </div>
-
       </div>
-
   </div>
-              
-  
+           
+  <div class="mt-5">
+  <div class="row px-lg-5">
+    <div class="col-lg-12 col-12"> 
+        <div class="card border-0 w-100 p-lg-5 bg_amour text-light text-center">
+            <div class="card-body p-lg-5">
+                <h1 class="card-title font_bold">Cadeaux d'Amour</h1>
+                <p class="px-lg-5">Sélection de cadeaux pour les amoureux.
+                    Offrir un amour, c'est avant tout offrir 
+                    un moment à partager à deux. Cadeau romantique, 
+                    coquine, ou simplement accessoires pour préparer une soirée romantique, 
+                    c'est à vous de décider. Choisissez le cadeau parfait à offrir pour la Saint-Valentin 
+                    ou toute autre occasion de célébrer votre amour.</p>
+               <button class="btn btn-sm btn-light font_pti rounded-pill font_bold">Découvrez Maintenant</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="mt-5">
+  <h1 class="h3 font_bold mt-5 ml-lg-5">Catégories recommandées <span style="color: rgb(146, 146, 146);"> (Par Catégorie)</span> </h1>
+    <div class="row mt-2 px-lg-5 ">
+      <div class="col-lg-6 col-12">
+        <div class="card border-0 w-100 p-lg-3 bg_electro text-light ">
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <h3 class="card-title font_bold">Des Produits Électronique</h3>
+                        <button class="btn btn-sm btn-light font_pti rounded-pill font_bold">Découvrez Plus</button>
+                    </div>
+                    <div class="col-lg-6">
+
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12 mt-2 mt-lg-0">
+        <div class="card border-0 w-100 p-lg-3 bg_beaute text-light ">
+            <div class="card-body ">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <h3 class="card-title font_bold">Des Produits Beauté</h3>
+                        <button class="btn btn-sm btn-light font_pti rounded-pill font_bold">Découvrez Plus</button>
+                    </div>
+                    <div class="col-lg-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2 px-lg-5">
+      <div class="col-lg-6 col-12">
+        <div class="card border-0 w-100 p-lg-3 bg_maison text-light">
+            <div class="card-body">
+                <div class="card-body ">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <h3 class="card-title font_bold">Des Produits Fait Maison</h3>
+                            <button class="btn btn-sm btn-light font_pti rounded-pill font_bold">Découvrez Plus</button>
+                        </div>
+                        <div class="col-lg-6">
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12 mt-2 mt-lg-0">
+        <div class="card border-0 w-100 p-lg-3 bg_bebe text-light">
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <h3 class="card-title font_bold">Des Produits Pour Bébés et Enfants</h3>
+                        <button class="btn btn-sm btn-light font_pti rounded-pill font_bold">Découvrez Plus</button>
+                    </div>
+                    <div class="col-lg-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

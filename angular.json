@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myshop": {
+    "copra": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/myshop",
+            "outputPath": "dist/copra",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,8 +27,9 @@
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": ["src/assets/js/myjs.js"
-                       ]
+            "scripts": [
+              "src/assets/js/myjs.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -65,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "myshop:build"
+            "browserTarget": "copra:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "myshop:build:production"
+              "browserTarget": "copra:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myshop:build"
+            "browserTarget": "copra:build"
           }
         },
         "test": {
@@ -113,15 +114,20 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "myshop:serve"
+            "devServerTarget": "copra:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "myshop:serve:production"
+              "devServerTarget": "copra:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "myshop"
+    }
+  },
+  "defaultProject": "copra"
 }

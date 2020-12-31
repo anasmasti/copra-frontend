@@ -1,45 +1,52 @@
-<app-header></app-header>
-
 <div class="login-block">
     <div class="container">
 	<div class="row">
-		<div class="col-md-4 login-sec">
+		<div class="col-md-4 login-sec text-center mt-4">
+      <span class="badge badge-pill badge-danger popuperrmsg p-3 mb-2 ">{{errormsg}}</span>
 		    <h2 class="text-center">Connecte-toi maintenant</h2>
-	<form class="login-form " style="margin-top: 60px;"  [formGroup]="loginForm" (ngSubmit)="loginUser()">
+	<form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
   <div class="form-group">
-    <input type="email" id="email" formControlName="email"  required [ngClass]="{'is-invalid': email.invalid, 'is-valid': !email.invalid }"  class="form-control rounded-pill" placeholder="Votre Email">
+    <input type="email" id="email" formControlName="email"  required [ngClass]="{'is-invalid': email.invalid && email.touched, 'is-valid': !email.invalid }"  class="form-control rounded-pill" placeholder="Votre Email">
     <div *ngIf="email.invalid && (email.dirty || email.touched)"
     class="alert alert-danger validationerrorstyle">
 
   <div *ngIf="email.errors.required">
-    email is required.
+    e-mail obligatoire.
   </div>
   <div *ngIf="email.errors.email">
-    email must be email.
+    e-mail invalide, Exemple mohammed@gmail.com.
   </div>
   </div>
   </div>
   <div class="form-group">
-    <input type="password" id="password"  required [ngClass]="{'is-invalid': password.invalid, 'is-valid': !password.invalid }"  formControlName="password" class="form-control rounded-pill" placeholder="Votre mot de passe">
+    <div class="input-group">
+    <input type="password" id="password" [type]="fieldTextType ? 'text' : 'password'" required [ngClass]="{'is-invalid': password.invalid && password.touched, 'is-valid': !password.invalid }"  formControlName="password" class="form-control" style="border-top-left-radius: 36px; border-bottom-left-radius: 36px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" placeholder="Votre mot de passe">
+    <span class="input-group-text bg-transparent" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 36px; border-bottom-right-radius: 32px;">
+      <i class="fas fa-eye-slash" [ngClass]="{
+        'fa-eye-slash': !fieldTextType,
+        'fa-eye': fieldTextType
+      }"
+      (click)="showpassword()"></i>
+    </span></div>
     <div *ngIf="password.invalid && (password.dirty || password.touched)"
     class="alert alert-danger validationerrorstyle">
 
   <div *ngIf="password.errors.required">
-    password is required.
+    mot de passe obligatoire.
   </div>
   <div *ngIf="password.errors.minlength">
-    password must be plus de 6 char.
+    le mot de passe doit contenir plus de 6 caractères.
   </div>
   </div>
   </div>
  
-    <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
-      <small>Remember Me</small>
-     </label>
+    <div class="form-check w-100">
+     <a [routerLink]="['/smfrp']" target="_blank" class="float-left mt-lg-1 ml-0" style="font-size: 12px;color: rgb(122, 122, 122);">Mot de passe oublié?</a>
      <button type="submit" [ngClass]="{'disabled': loginForm.invalid}" class="btn btn-sm btncommande rounded-pill shadow float-right font_bold text-uppercase">Se Connecter</button>
    </div>
+   <div class="btn-group w-100">
+   <p class="float-left ml-lg-5 ml-3 mt-5  " style="font-size: 12px;color: rgb(116, 116, 116);">Vous n'avez pas de compte?</p><a [routerLink]="['/register']" target="_blank" class="float-right mt-5  ml-0 font_bold ml-1" style="font-size: 12px;color: rgb(31, 31, 31);">Créer</a>
+  </div>
   
 </form>
 <div class="copy-text">Copyright 2020 <i class="fas fa-copyright"></i> COPRA</div>

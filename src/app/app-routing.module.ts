@@ -1,49 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TrendingComponent } from './trending/trending.component';
-import { ProductsComponent } from './products/products.component';
-import { BlogsComponent } from './blogs/blogs.component';
-import { OurServicesComponent } from './our-services/our-services.component';
-import { ShowAboutComponent } from './show-about/show-about.component';
-import { AllProductsComponent } from './all-products/all-products.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { ContactpageComponent } from './contactpage/contactpage.component';
 import { ShowProductComponent } from './show-product/show-product.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { CartComponent } from './cart/cart.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TestimonyComponent } from './testimony/testimony.component';
 import { AuthGuard } from './auth.guard';
 import { ShowBlogsComponent } from './show-blogs/show-blogs.component';
-import { CopraFoodComponent } from './copra-food/copra-food.component';
-import { CopraPromoComponent } from './copra-promo/copra-promo.component';
-import { CopraOriginalComponent } from './copra-original/copra-original.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'home', component: HomepageComponent },
-  { path: 'all-products', component: AllProductsComponent },
-  { path: 'blogs', component: BlogsComponent },
+  { path: 'all-products', loadChildren: () => import('./all-products/all-products.module').then(m => m.AllProductsModule)},
   { path: 'blog/:id', component: ShowBlogsComponent },
-  { path: 'trending', component: TrendingComponent },
-  { path: 'services', component: OurServicesComponent },
-  { path: 'product', component: ProductsComponent },
-  { path: 'about', component: ShowAboutComponent },
-  { path: 'contact', component: ContactpageComponent },
+  { path: 'about', loadChildren: () => import('./show-about/show-about.module').then(m => m.ShowAboutModule)},
+  { path: 'contact', loadChildren: () => import('./contactpage/contactpage.module').then(m => m.ContactpageModule)},
   { path: 'thankyou/:userid', component: ThankyouComponent, canActivate: [AuthGuard] },
-  { path: 'checkout/:userid', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'smfrp', component: TestimonyComponent },
+  { path: 'upwc/:userid', component: CheckoutComponent},
   { path: 'products/:id/:userid', component: ShowProductComponent },
-  { path: 'cart/:userid', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'copra-food', component: CopraFoodComponent },
-  { path: 'copra-promo', component: CopraPromoComponent },
-  { path: 'copra-original', component: CopraOriginalComponent },
-  { path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuard] }
+  { path: 'cart/:userid', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule), canActivate: [AuthGuard]},
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
+  { path: 'copra-food', loadChildren: () => import('./copra-food/copra-food.module').then(m => m.CopraFoodModule)},
+  { path: 'copra-promo', loadChildren: () => import('./copra-promo/copra-promo.module').then(m => m.CopraPromoModule)},
+  { path: 'copra-original', loadChildren: () => import('./copra-original/copra-original.module').then(m => m.CopraOriginalModule) },
+  { path: 'profile/:id', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule), canActivate: [AuthGuard] }
 
 ];
 

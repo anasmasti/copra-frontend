@@ -39,6 +39,9 @@ export class RegisterComponent implements OnInit {
     addressedelivraison:new FormControl(null,[
       Validators.required,]),
   })
+  fieldTextType: boolean;
+  fieldTextType2: boolean;
+  msgerr: any;
 
   constructor(private toastr: ToastrService, public formBuilder: FormBuilder,
     public authService: MyAuthService,
@@ -48,11 +51,12 @@ export class RegisterComponent implements OnInit {
   }
   registerUser() {
     this.authService.register(this.registerForm.value).subscribe(() => {
+      
         this.registerForm.reset()
         this.router.navigate(['login']);
         this.toastr.success('Votre compte à été creé avec success', 'Merci !');
 
-    })
+    }, error =>   this.msgerr = error.error)
   }
   checkPasswords(input: FormControl) { 
     if (input.parent) {
@@ -73,4 +77,10 @@ export class RegisterComponent implements OnInit {
  get codepostal() { return this.registerForm.get('codepostal'); }
  get addressedelivraison() { return this.registerForm.get('addressedelivraison'); }
 
+showpassword() {
+  this.fieldTextType = !this.fieldTextType;
+}
+showcofirmpassword() {
+  this.fieldTextType2 = !this.fieldTextType2;
+}
 }

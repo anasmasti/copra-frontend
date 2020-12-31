@@ -1,1 +1,29 @@
-<p>testimony works!</p>
+<app-header></app-header>
+<div class="container w-50 h-100 mt-5 text-center">
+    <h3 class="font_bold">Récupération de mot de passe</h3>
+      <span class="badge badge-pill badge-danger popuperrmsg p-3 mb-2 mt-lg-2 ">{{msgerr}}</span>
+      
+    <form [formGroup]="sendemailforresetpasswordForm" class="mt-5" (ngSubmit)='sendemailforresetpassword()'>
+    <div class="row">
+        <label for="email" class="font_bold mb-0" style="font-size: 12px;">Entrer ton e-mail s'il vous plait :</label>
+        <div class="input-group">
+        <input [ngClass]="{'is-invalid': email.invalid && email.dirty , 'is-valid': !email.invalid}" id="email"  formControlName="email" class="form-control rounded-pill">
+     </div>
+      </div>
+      
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+      class="alert alert-danger validationerrorstyle">
+  
+    <div *ngIf="email.errors.required">
+      mot de passe obligatoire.
+    </div>
+    <div *ngIf="email.errors.email">
+      le mot de passe doit contenir plus de 6 caractères.
+    </div>
+    </div>
+    <div class="row">
+    <button type="submit" [ngClass]="{'disabled': sendemailforresetpasswordForm.invalid}" class="form-control btn btn-sm shadow font_bold mt-3 rounded-pill btncommande">Récupérer mon mot de passe</button>
+        
+    </div>
+  </form>
+</div>
